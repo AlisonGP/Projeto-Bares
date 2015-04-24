@@ -3,6 +3,7 @@
 #include "stack.hpp"
 #include "queue.hpp"
 #include <string>
+#include <stdlib.h>
 class Bares{
 	//Atributos
 	std::string expression;
@@ -45,7 +46,7 @@ class Bares{
 	/** Verifica se o simbolo é um opeador ou operando.*/
 	bool isOperator(std::string symb);
 	/** Verifica se o operando tem mais precedência que outro.*/
-	bool prcd();
+	bool prcd(std::string opr1, std::string opr2);
 	/** Imprime o resultado no terminal ou em um arquivo de texto.*/
 	void printResult();
 	

@@ -1,7 +1,6 @@
-	Bares::Bares(std::string expression){
-		/**
-			code here
-		*/
+	Bares::Bares(std::string expr){
+		expression = expr;
+
 		std::cout << "BARES:construtor" << std::endl;
 		expressionPOS.enqueue("3");
 		expressionPOS.enqueue("0");
@@ -21,15 +20,38 @@
 	}
 
 	void Bares::tokenize(){
-		/**
-			code here
-		*/
+		int tam = expression.size();
+		std::string a;
+
+		for(int i = 0; i < tam; i++){
+			a = expression[i];
+			if(a !=" ")
+				expressionINF.enqueue(a);
+		}
+
 	}
 	
 	void Bares::infTOposFix(){
-		/**
-			code here
-		*/
+		int tam = expression.size();
+		std::string aux;
+		for(int i = 0; i < tam; i++){
+			aux = expressionINF.dequeue();
+			if(!isOperator(aux)){
+				expressionPOS.enqueue(aux);
+			}				
+			else{
+				while(!operators.isEmpty() && prcd(operators.top(), aux)){
+					if(prcd(operators.top(), aux)){
+						expressionPOS.enqueue(operators.pop());
+					}					
+				}
+				operators.push(aux);
+
+			}
+		}
+		while(!operators.isEmpty()){
+			expressionPOS.enqueue(operators.pop());
+		}
 	}
 	
 	void Bares::parse(){
@@ -122,10 +144,8 @@
 		return true;
 	}
 
-	bool Bares::prcd(){
-		/**
-			code here
-		*/
+	bool Bares::prcd(std::string opr1, std::string opr2){
+		
 		return true;
 	}
 	
@@ -137,6 +157,9 @@
 
 	void Bares::init(){
 		/**
-			code here
+			fazndo um teste
 		*/
+			tokenize();
+			expressionINF.print();
+
 	}
