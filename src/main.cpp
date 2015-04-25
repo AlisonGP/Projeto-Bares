@@ -11,7 +11,7 @@ int main(int argc, char const *argv[])
 	//	std::cout << i << ": " <<argv[i] << std::endl;
 	//}
 	
-	Bares bares("3 + 2 + 4");
+	Bares bares("32 + 2015 - 49 / ( - 10 % 2 ) * 3 ^ 2");
 	
 	bares.init();
 	return 0;

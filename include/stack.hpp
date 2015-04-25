@@ -19,7 +19,8 @@ public:
 	}
 	TYPE push(TYPE value) {
 		//std::cout<< "STACK:push()" << std::endl;
-		return seq.addFirst(value);
+		seq.addFirst(value);
+		return value;
 	}
 	TYPE pop() {
 		//std::cout<< "STACK:pop()" << std::endl;
@@ -34,6 +35,11 @@ public:
 		//std::cout<< "STACK:print()" << std::endl;
 		seq.print();
 	}
+
+	int getSize(){
+		return seq.getSize();
+	}
+
 };
 
 #endif

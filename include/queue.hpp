@@ -33,6 +33,10 @@ public:
 		//std::cout <<"QUEUE:print()"<<std::endl;
 		seq.print();
 	}
+	
+	int getSize(){
+		return seq.getSize();
+	}
 };
 
 #endif
