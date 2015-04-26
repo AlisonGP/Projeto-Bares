@@ -40,7 +40,7 @@ class Bares{
 	int additiveInverse(int a);
 	
 	/** Calcula o resultado da expressão.*/
-	int calculate(std::string oper, int opnd1, int opnd2);
+	int calculate(std::string oper, int opnd1, int opnd2 = 0);
 	/** Verifica se a operação é binária ou unária.*/
 	bool isBinary();
 	/** Verifica se o simbolo é um opeador ou operando.*/

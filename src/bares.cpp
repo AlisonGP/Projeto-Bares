@@ -2,15 +2,15 @@
 		expression = expr;
 
 		std::cout << "BARES:construtor" << std::endl;
-		expressionPOS.enqueue("3");
-		expressionPOS.enqueue("0");
-		expressionPOS.enqueue("+");
-	    expressionPOS.enqueue("2");
-		expressionPOS.enqueue("4");
-	    expressionPOS.enqueue("-");
-	 	expressionPOS.enqueue("*");
-		expressionPOS.print();
-		avaliate();
+		//expressionPOS.enqueue("3");
+		//expressionPOS.enqueue("~");
+		//expressionPOS.enqueue("2");
+	    //expressionPOS.enqueue("~");
+		//expressionPOS.enqueue("+");
+	    //expressionPOS.enqueue("-");
+	 	//expressionPOS.enqueue("*");
+		//expressionPOS.print();
+		//avaliate();
 	}
 	Bares::~Bares(){
 		/**
@@ -42,6 +42,7 @@
 		while(!expressionINF.isEmpty()){
 			if(!isOperator(expressionINF.front())){
 				aux = aux+expressionINF.dequeue();
+				//aux = expressionINF.dequeue();
 				expressionPOS.enqueue(aux);
 			}else{
 				aux = expressionINF.dequeue();
@@ -59,6 +60,7 @@
 		while(!operators.isEmpty()){
 			expressionPOS.enqueue(operators.pop());
 		}
+		
 	}
 	
 	void Bares::parse(){
@@ -68,7 +70,7 @@
 	}
 	
 	bool Bares::isOperator(std::string symb){
-		if(symb == "+" || symb == "-" || symb == "*" || symb == "/" || symb == "^" || symb == "%" || symb == "(" || symb == ")")
+		if(symb == "+" || symb == "-" || symb == "*" || symb == "/" || symb == "^" || symb == "%" || symb == "(" || symb == ")" || symb == "~")
 				return true;
 		return false;
 		
@@ -118,6 +120,10 @@
 		{	
 			return exponentiation(opnd1, opnd2);
 		}	
+		if(oper == "~")
+		{	
+			return additiveInverse(opnd1);
+		}	
 	}
 	
 	void Bares::avaliate(){
@@ -134,10 +140,18 @@
 				aux= atoi(symb.c_str());
 				operands.push(aux);
 			}else{
-				opnd1 = operands.pop();
-				opnd2 = operands.pop();
-				resultado = calculate(symb,opnd2, opnd1);
-				operands.push(resultado);
+				if(symb == "~"){
+					opnd1 = operands.pop();
+					//opnd2 = operands.pop();
+					resultado = calculate(symb, opnd1);
+					operands.push(resultado);
+				
+				}else{
+					opnd1 = operands.pop();
+					opnd2 = operands.pop();
+					resultado = calculate(symb,opnd2, opnd1);
+					operands.push(resultado);
+				}
 			}
 		}
 		resultado = operands.pop();
