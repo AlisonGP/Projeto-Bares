@@ -37,7 +37,7 @@
 				return true;
 			}else{
 				std::string aux = expression.substr(i-1,1);
-				if( isOperator(aux) ){
+				if( isSymbol(aux) ){
 					//std::cout << "SIM! \n";
 					return true;
 				}
@@ -67,7 +67,7 @@
 		while(i < tam ){
 			
 			aux = expression[i];
-			if( !isOperator(aux) )
+			if( !isSymbol(aux) )
 			{	
 				a = a +aux;
 				
@@ -99,10 +99,60 @@
 		}
 	}
 	
+/* Baseado no algoritmo de Stefan
+ * http://stackoverflow.com/questions/12684086/convert-from-an-infix-expression-to-postfix-c-using-stacks
+ * */
 	void Bares::infTOposFix(){
+		std::cout  << "INFTOPOSFIX" << std::endl;
+		operators.push("(");
+		std::string current;// = expressionINF.front();
+		//std::cout << current;
+		
+		
+		while(!expressionINF.isEmpty()){
+			current = expressionINF.front();
+			
+			std::cout << "." << current <<". "  ;
+			if("(" == current) { //se é um parentese aberto, coloca na pilha de operadores
+				std::cout << "parentese aberto" << std::endl ;
+				operators.push(expressionINF.dequeue());
+			}else if(")" == current) { // se é um parentese fechado
+				std::cout << "parentese fechado" << std::endl ;
+				while(!operators.isEmpty() && "(" != operators.top()) { //enquanto o topo da pilha não for um parentese fechado, esvazia a pilha
+					expressionPOS.enqueue(operators.pop() );
+				}
+				// Descarta o parentese aberto
+				operators.pop();
+				expressionINF.dequeue();
+			}else if(isOperator(current)) { // se é um operador, coloca na pilha conforme a sua precedencia
+				std::cout << "operador" << std::endl ;
+				while(!operators.isEmpty() && isOperator(operators.top()) && prcd(operators.top(), current) && current != "~") {
+					expressionPOS.enqueue(operators.pop() );
+				}
+				operators.push(expressionINF.dequeue());
+			}else if(!isOperator( current )){ // se é um operando, coloca em expressionPOS
+				std::cout << "operando" << std::endl ;
+				expressionPOS.enqueue(expressionINF.dequeue());
+			}
+			
+		}
+		
+		// Started with a left paren, now close it:
+		// While top of stack is not a left paren
+		while(!operators.isEmpty() && "(" != operators.top()) { //??
+			expressionPOS.enqueue(operators.pop() );
+		}
+		
+		// Discard the left paren
+		operators.pop();
+    
+	
+		
+		/*
 		std::cout << "2 antes: ";
 		expressionPOS.print();
-	
+		
+		bool parentese = false;
 		
 		
 		std::string aux = "";
@@ -121,16 +171,32 @@
 				std::cout <<" operador:"; 
 				aux = expressionINF.dequeue();
 				std::cout << "operts.isEmpty():" << operators.isEmpty();
-				while(!operators.isEmpty() && prcd(operators.top(), aux)   && aux != "~"){
-					std::cout << " prcd("<<operators.top()<<", " << aux<<"):" << prcd(operators.top(), aux);
-					//std::cout << "While interno 1" << aux << std::endl;
-					if(prcd(operators.top(), aux)){
-						if(operators.top() != ")" && operators.top() != "(")	
-							expressionPOS.enqueue(operators.pop());
+				if( aux!= "(" && aux != ")")	{
+					if(parentese == true){
+						operators.push(aux);
+						parentese = false; 
 						
+					}else{
+						while(!operators.isEmpty() && prcd(operators.top(), aux)   && aux != "~"){
+							std::cout << " prcd("<<operators.top()<<", " << aux<<"):" << prcd(operators.top(), aux);
+							//std::cout << "While interno 1" << aux << std::endl;
+							if(prcd(operators.top(), aux)){
+								//if(operators.top() != ")" && operators.top() != "(")	
+									expressionPOS.enqueue(operators.pop());
+								
+							}
+						}
+						operators.push(aux);
 					}
 				}
-				operators.push(aux);
+				if(aux == "("){
+					parentese = true;
+					//expressionINF.dequeue();
+					}
+				if(aux == ")"){
+					
+				}
+				//operators.push(aux);
 				std::cout << " oprts:" ;
 				operators.print();
 			}				
@@ -141,7 +207,7 @@
 		
 			std::cout << "expressionPOS: ";
 			expressionPOS.print();
-		
+		*/
 	}
 	
 	void Bares::parse(){
@@ -150,8 +216,18 @@
 		*/
 	}
 	
-	bool Bares::isOperator(std::string symb){
+	
+	
+	bool Bares::isSymbol(std::string symb){
 		if(symb == "+" || symb == "-" || symb == "*" || symb == "/" || symb == "^" || symb == "%" || symb == "(" || symb == ")" || symb == "~")
+				return true;
+		return false;
+		
+	}
+	
+	
+	bool Bares::isOperator(std::string symb){
+		if(symb == "+" || symb == "-" || symb == "*" || symb == "/" || symb == "^" || symb == "%" || symb == "~")
 				return true;
 		return false;
 		
@@ -251,7 +327,7 @@
 		return true;
 	}
 
-	//Verifica qual o operador com maior precedência
+	//Verifica se operador1 tem maior precedencia que operador2 
 	bool Bares::prcd(std::string opr1, std::string opr2){
 		int op1, op2;
 
@@ -264,9 +340,10 @@
 			op1 = 2;
 		}else if(opr1 == "~"){
         	op1 = 3;
-        }else if (opr1 == "(" || opr1 == ")"){
-        	op1 = 4;
         }
+        /*else if (opr1 == "(" || opr1 == ")"){
+        	op1 = 4;
+        }*/
         //Converte o operador 2 em um número a partir de sua precedência.
         if(opr2 == "+" || opr2 == "-"){
 			op2 = 0;
@@ -276,9 +353,10 @@
 			op2 = 2;
 		}else if(opr2 == "~"){
         	op2 = 3;
-        }else if (opr2 == "(" || opr2 == ")"){
-        	op2 = 4;
         }
+        /*else if (opr2 == "(" || opr2 == ")"){
+        	op2 = 4;
+        }*/
         
         //Compara se o operador 1 possui maior precedência sobre o operador 2.
 		if(op1 >= op2)
@@ -299,10 +377,8 @@
 			tokenize();
 			std::cout << "1: ";
 			expressionINF.print();
-			//std::cout << "2 antes: ";
-			//expressionPOS.print();
 			infTOposFix();
-			//std::cout << "2 depois: ";
-			//expressionPOS.print();
-
+			std::cout << "expressionPOS"<<std::endl;
+			expressionPOS.print();
+			avaliate();
 	}

@@ -45,7 +45,11 @@ class Bares{
 	int calculate(std::string oper, int opnd1, int opnd2 = 0);
 	/** Verifica se a operação é binária ou unária.*/
 	bool isBinary();
-	/** Verifica se o simbolo é um opeador ou operando.*/
+	
+	/** Verifica se a string é um dos simbolo: + - * / % ^ ~ ( ) */
+	bool isSymbol(std::string symb);
+	
+	/** Verifica se o simbolo é um dos operadores: + - * / % ^ ~ */
 	bool isOperator(std::string symb);
 	/** Verifica se o operando tem mais precedência que outro.*/
 	bool prcd(std::string opr1, std::string opr2);
