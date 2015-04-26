@@ -575,7 +575,7 @@ template <typename TYPE>
 void Sequence<TYPE>::print() {
 	Node *aux = list.next;
 	while(aux != nullptr){
-		std::cout << aux->data<< " ";// << std::endl; 
+		std::cout << aux->data<< ".";// << std::endl; 
 		aux = aux->next;
 	}
 	std::cout<< std::endl; 

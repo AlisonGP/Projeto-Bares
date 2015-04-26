@@ -18,26 +18,65 @@
 		*/
 		std::cout << "BARES:destrutor" << std::endl;
 	}
-
-	void Bares::tokenize(){
-		int tam = expression.size();
-		std::string a = "";
-
-		for(int i = 0; i < tam; i++){
-			std::cout << "I: " << i << std::endl;
-			if(expression[i] != ' ' )
-				a = a + expression[i];
-			while(!isOperator(""+expression[i+1]) && i < tam){
+	
+	void Bares::removeCharacter(std::string& str, char c){
+		unsigned int i =0;
+		while(i<str.size()){
+			if(str[i] == c)
+				str = str.erase(i,1);
+			else
 				i++;
-				if(expression[i] != ' ')
-					a = a + expression[i];
+		}
+	}
+	
+	void Bares::tokenize(){
+		std::cout << "TOKENIZE" << std::endl;
+		
+		removeCharacter(expression, 32); //espaço
+		removeCharacter(expression, 9); //tabulação
+		int tam = expression.size();
+		std::cout << "espaco removido: \"" << expression<< "\" Size:"<< tam << std::endl;
+		
+		
+		std::string a = "";
+		std::string aux;
+
+		int i = 0;
+		while(i < tam ){
+			
+			aux = expression[i];
+			if( !isOperator(aux) )
+			{	
+				a = a +aux;
+				
 			}
+			else{
+				
+				if(a != ""){
+					expressionINF.enqueue(a);
+					std::cout << "\"" << a << "\"" << std::endl;
+					std::cout <<"\"" << aux << "\""<< std::endl;
+				}else{
+					std::cout << "\"" << aux << "\""<< std::endl;
+				}
+				a = "";
+				expressionINF.enqueue(aux);
+				
+			}
+			i++;
+		}
+		if(a != ""){
+			std::cout << "\"" << a << "\"" << std::endl;
 			expressionINF.enqueue(a);
 		}
-
 	}
 	
 	void Bares::infTOposFix(){
+		std::cout << "2 antes: ";
+		//	expressionPOS.print();
+	
+		
+		
 		std::string aux = "";
 		while(!expressionINF.isEmpty()){
 			if(!isOperator(expressionINF.front())){
@@ -60,6 +99,9 @@
 		while(!operators.isEmpty()){
 			expressionPOS.enqueue(operators.pop());
 		}
+		
+			std::cout << "2 depois: ";
+			expressionPOS.print();
 		
 	}
 	
@@ -225,8 +267,10 @@
 			tokenize();
 			std::cout << "1: ";
 			expressionINF.print();
-			infTOposFix();
-			std::cout << "2: ";
+			std::cout << "2 antes: ";
 			expressionPOS.print();
+			infTOposFix();
+			//std::cout << "2 depois: ";
+			//expressionPOS.print();
 
 	}

@@ -14,8 +14,8 @@ class Bares{
 	Queue<std::string> messageError;
 
 	//Métodos
-
-	
+	/**remove todas as ocorrências do caractere c na string str*/
+	void Bares::removeCharacter(std::string& str, char c);
 	/**
 	* Transforma uma string de estrada em uma expressão expressão IN-fix.*/
 	void tokenize();
