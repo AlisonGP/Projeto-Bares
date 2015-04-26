@@ -15,7 +15,9 @@ class Bares{
 
 	//Métodos
 	/**remove todas as ocorrências do caractere c na string str*/
-	void Bares::removeCharacter(std::string& str, char c);
+	void removeCharacter(std::string& str, char c);
+	/**retorna true se o operando é o primeiro caractere da expression ou se o caractere imediatamente antes dele é um operando*/
+	bool isUnary(int i);
 	/**
 	* Transforma uma string de estrada em uma expressão expressão IN-fix.*/
 	void tokenize();

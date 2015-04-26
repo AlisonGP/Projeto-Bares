@@ -29,6 +29,28 @@
 		}
 	}
 	
+	bool Bares::isUnary(int i){
+		if(expression[i] == '-' || expression[i] == '~'){
+			//std::cout << "pode ser unario \n";
+			if(i==0){
+				//std::cout << "SIM! \n";
+				return true;
+			}else{
+				std::string aux = expression.substr(i-1,1);
+				if( isOperator(aux) ){
+					//std::cout << "SIM! \n";
+					return true;
+				}
+				else{
+					//std::cout << "NAO! \n";
+					return false;
+				}
+			}
+		}else{
+			//std::cout << "definitivamente nao e unario \n";
+			return false;
+		}
+	}
 	void Bares::tokenize(){
 		std::cout << "TOKENIZE" << std::endl;
 		
@@ -52,6 +74,7 @@
 			}
 			else{
 				
+				
 				if(a != ""){
 					expressionINF.enqueue(a);
 					std::cout << "\"" << a << "\"" << std::endl;
@@ -59,7 +82,12 @@
 				}else{
 					std::cout << "\"" << aux << "\""<< std::endl;
 				}
+				
+				std::cout << "operador unario:" <<isUnary(i) << std::endl;
 				a = "";
+				if(isUnary(i))
+					expressionINF.enqueue("~");
+				else
 				expressionINF.enqueue(aux);
 				
 			}
@@ -73,34 +101,45 @@
 	
 	void Bares::infTOposFix(){
 		std::cout << "2 antes: ";
-		//	expressionPOS.print();
+		expressionPOS.print();
 	
 		
 		
 		std::string aux = "";
 		while(!expressionINF.isEmpty()){
+			std::cout << "while " << expressionINF.front();
 			if(!isOperator(expressionINF.front())){
-				aux = aux+expressionINF.dequeue();
+				std::cout <<" operando" << std::endl; 
+				//aux = aux+expressionINF.dequeue();
 				//aux = expressionINF.dequeue();
-				expressionPOS.enqueue(aux);
+				//expressionPOS.enqueue(aux);
+				expressionPOS.enqueue(expressionINF.dequeue());
 			}else{
+				
+			std::cout << "expressionPOS: ";
+			expressionPOS.print();
+				std::cout <<" operador:"; 
 				aux = expressionINF.dequeue();
-				while(!operators.isEmpty() && prcd(operators.top(), aux)){
+				std::cout << "operts.isEmpty():" << operators.isEmpty();
+				while(!operators.isEmpty() && prcd(operators.top(), aux)   && aux != "~"){
+					std::cout << " prcd("<<operators.top()<<", " << aux<<"):" << prcd(operators.top(), aux);
 					//std::cout << "While interno 1" << aux << std::endl;
 					if(prcd(operators.top(), aux)){
-						if(operators.top() != ")" && operators.top() != "(")
+						if(operators.top() != ")" && operators.top() != "(")	
 							expressionPOS.enqueue(operators.pop());
+						
 					}
 				}
-				//std::cout << "While interno 2" << aux << std::endl;
 				operators.push(aux);
+				std::cout << " oprts:" ;
+				operators.print();
 			}				
 		}
 		while(!operators.isEmpty()){
 			expressionPOS.enqueue(operators.pop());
 		}
 		
-			std::cout << "2 depois: ";
+			std::cout << "expressionPOS: ";
 			expressionPOS.print();
 		
 	}
@@ -217,37 +256,30 @@
 		int op1, op2;
 
 		// Converte o operador 1 em um número apartir da sua precedência.
-		if(opr1 == "+"){
+		if(opr1 == "+" || opr1 == "-"){
 			op1 = 0;
-		}else if(opr1 == "-"){
-			if(isBinary()){
-				op1 = 0;
-			}else{
-				op1 = 2;
-			}
 		}else if(opr1 == "*" || opr1 == "/" || opr1 == "%"){
 			op1 = 1;
 		}else if(opr1 == "^"){
+			op1 = 2;
+		}else if(opr1 == "~"){
         	op1 = 3;
         }else if (opr1 == "(" || opr1 == ")"){
         	op1 = 4;
         }
         //Converte o operador 2 em um número a partir de sua precedência.
-        if(opr2 == "+"){
+        if(opr2 == "+" || opr2 == "-"){
 			op2 = 0;
-		}else if(opr2 == "-"){
-			if(isBinary()){
-				op2 = 0;
-			}else{
-				op2 = 2;
-			}
 		}else if(opr2 == "*" || opr2 == "/" || opr2 == "%"){
 			op2 = 1;
 		}else if(opr2 == "^"){
+			op2 = 2;
+		}else if(opr2 == "~"){
         	op2 = 3;
         }else if (opr2 == "(" || opr2 == ")"){
         	op2 = 4;
         }
+        
         //Compara se o operador 1 possui maior precedência sobre o operador 2.
 		if(op1 >= op2)
 			return true;
@@ -267,8 +299,8 @@
 			tokenize();
 			std::cout << "1: ";
 			expressionINF.print();
-			std::cout << "2 antes: ";
-			expressionPOS.print();
+			//std::cout << "2 antes: ";
+			//expressionPOS.print();
 			infTOposFix();
 			//std::cout << "2 depois: ";
 			//expressionPOS.print();
