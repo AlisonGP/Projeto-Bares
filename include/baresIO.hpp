@@ -3,16 +3,16 @@
 
 #include <iostream>
 #include <fstream>
-class BARESIO
+class BaresIO
 {
 
 	std::ifstream inputFile;
 	std::ofstream outputFile;
 	bool defaultOutput;
 public:
-	BARESIO(std::string inFile, std::string outFile);
-	BARESIO(std::string inFile);
-	~BARESIO();
+	BaresIO(std::string inFile, std::string outFile);
+	BaresIO(std::string inFile);
+	~BaresIO();
 	void writeFile();
 	Queue<string> readFile();
 };

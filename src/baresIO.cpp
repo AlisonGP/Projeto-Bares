@@ -1,22 +1,22 @@
 
-BARESIO::BARESIO(std::string inFile, std::string outFile){
+BaresIO::BaresIO(std::string inFile, std::string outFile){
 	inputFile.open(inFile);
 	outputFile.open(outFile, ofstream::app);
 }
-BARESIO::BARESIO(std::string inFile){
+BaresIO::BaresIO(std::string inFile){
 	inputFile.open(inFile);
 	defaultOutput = true;
 }
-BARESIO::~BARESIO(){
+BaresIO::~BaresIO(){
 	std::cout << "BARESIO Destrutor";
 }
-void BARESIO::writeFile(string result){
+void BaresIO::writeFile(string result){
 	if(outputFile.is_open() && outputFile.good()){
 		outputFile << result;
 		outputFile.close();
 	}
 }
-Queue<string> BARESIO::readFile(){
+Queue<string> BaresIO::readFile(){
 	Queue<string> expressions;
 	string line;
 	if(inputFile.is_open() && inputFile.good()){
