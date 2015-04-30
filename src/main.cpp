@@ -22,7 +22,7 @@ int main(int argc, char const *argv[])
 	//Bares bares("3 ^ 2"); // 3 2 ^
 	//Bares bares("3 ~ 2"); // erro
 	//Bares bares("3 + 2 - 4"); // 3 2 + 4 -
-	//Bares bares("3 % 2 * 4"); // 3 2 % 4 *
+	Bares bares("3 % 2 * 4"); // 3 2 % 4 *
 	//Bares bares("3 * 2 +1 "); // 3 2 * 1 +
 	//Bares bares("3 + 2 * 1"); // 3 2 1 * +
 	//Bares bares("-3"); // 3 ~
@@ -41,7 +41,7 @@ int main(int argc, char const *argv[])
 	//Bares bares(" (3 + 2 * 1) * 5"); // 3 2 1 * + 5 *
 	
 	//Bares bares("	- 32 + 20 15- 49 /( -   10 % 2 )	 * 3 ^ 2 "); // 32 ~ 2015 + 49 10 ~ 2 % / 3 2 ^ * - // da erro!!
-	Bares bares("	- 10 + 6 * 2 - 2"); // 10 ~ 6 2 * + 2 -  = 0
+	//Bares bares("	- 10 + 6 * 2 - 2"); // 10 ~ 6 2 * + 2 -  = 0
 	//Bares bares("12 / 5 + 4^	2 * 1"); // 12 5 / 4 2 ^ 1 * + 
 	
 	//Bares bares("	- 33 + (-6 * - - 5 - 7) "); // 33 ~ 6 ~ 5 ~ ~ * 7 - +   
