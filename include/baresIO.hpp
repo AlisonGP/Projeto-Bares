@@ -2,19 +2,20 @@
 #define	__BARESIO__
 
 #include <iostream>
-#include <fstream>
+#include <cstdio>
+#include "queue.hpp"
 class BaresIO
 {
 
-	std::ifstream inputFile;
-	std::ofstream outputFile;
-	bool defaultOutput;
+	std::string inputSFile;
+	std::string outputSFile;
+	bool stdOutput;
 public:
-	BaresIO(std::string inFile, std::string outFile);
-	BaresIO(std::string inFile);
+	BaresIO(std::string inputS, std::string outputS);
+	BaresIO(std::string inputS);
 	~BaresIO();
-	void writeFile();
-	Queue<string> readFile();
+	void writeFile(std::string result);
+	void readFile(Queue<std::string> &expressions);
 };
 
 #include "../src/baresIO.cpp"
