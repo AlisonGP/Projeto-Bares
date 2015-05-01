@@ -1,13 +1,13 @@
 BaresIO::BaresIO(std::string inputS, std::string outputS){
-	inputSFile = inputS;
-	outputSFile = outputS; 
+	inputSFile = "data/"+inputS;
+	outputSFile = "data/"+outputS; 
 }
 BaresIO::BaresIO(std::string inputS){
-	inputSFile = inputS;
+	inputSFile = "data/"+inputS;
 	stdOutput = true;
 }
 BaresIO::~BaresIO(){
-	std::cout << "BARESIO Destrutor";
+	std::cout << "Destrutor BaresIO" << std::endl;
 }
 void BaresIO::writeFile(std::string result){
 	std::FILE *outputFile;

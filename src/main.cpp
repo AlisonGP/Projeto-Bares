@@ -57,7 +57,7 @@ int main(int argc, char const *argv[])
 	std::string aux;
 	//quando você passa só o arquivo de entrada ele joga diretamente na saída padrão.
 	//se passar dois parâmetros o segundo será o arquivo de saida.
-	BaresIO baresio = BaresIO("data/entrada.txt");
+	BaresIO baresio = BaresIO("entrada.txt");
 	baresio.readFile(fila);
 	while(!fila.isEmpty()){
 		aux = fila.dequeue();

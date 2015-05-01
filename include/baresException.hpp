@@ -2,6 +2,7 @@
 #define	__BARESEXCEPTION__
 
 #include <iostream>
+#include "baresIO.hpp"
 /**
 * @autor Alison Jhonas
 * @version 1.0
@@ -9,8 +10,10 @@
 */
 class BaresException
 {
+	BaresIO baresIO;
 public:
-	BaresException();
+	BaresException(std::string ifile, std::string ofile);
+	BaresException(std::string ifile);
 	~BaresException();
 	/**
 	* Verifica se o operando está dentro do intervalo inteiro.
