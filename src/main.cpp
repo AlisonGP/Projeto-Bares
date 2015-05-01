@@ -64,6 +64,6 @@ int main(int argc, char const *argv[])
 		baresio.writeFile(aux);
 	}
 
-	bares.init();
+	//bares.init();
 	return 0;
 }
