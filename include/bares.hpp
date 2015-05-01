@@ -36,6 +36,8 @@ class Bares{
 	int multiplication(int a, int b);
 	/** retorna o resultado da divisão.*/
 	int division(int a, int b);
+	/** retorna o resultado do modulo a mod b.*/
+	int modulo(int a, int b);
 	/** retorna o resultado da exponenciação.*/
 	int exponentiation(int a, int b);
 	/** retorna o resultado da negação.*/

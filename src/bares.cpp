@@ -250,6 +250,10 @@
 		return a/b;
 	}
 
+	int Bares::modulo(int a, int b){
+		return a%b;
+	}
+
 	int Bares::exponentiation(int a, int b){
 		int i, aux=1;
 		for(i=0; i<b; i++){
@@ -273,6 +277,8 @@
 			return multiplication(opnd1, opnd2);
 		if(oper == "/")
 			return division(opnd1, opnd2);
+		if(oper == "%")
+			return modulo(opnd1, opnd2);
 		if(oper == "^")
 		{	
 			return exponentiation(opnd1, opnd2);
