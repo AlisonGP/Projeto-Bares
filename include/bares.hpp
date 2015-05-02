@@ -3,26 +3,29 @@
 #include "stack.hpp"
 #include "queue.hpp"
 #include <string>
+#include <sstream>
 #include <stdlib.h>
 class Bares{
 	//Atributos
-	std::string expression;
+	Queue<std::string> expressionsQueue;
+	
 	Queue<std::string> expressionINF;
 	Queue<std::string> expressionPOS;
 	Stack<std::string> operators;
 	Stack<int> operands;
 	Queue<std::string> messageError;
+	std::string expResult;
 
 	//Métodos
 	/**remove todas as ocorrências do caractere c na string str*/
 	void removeCharacter(std::string& str, char c);
 	/**retorna true se o operando é o primeiro caractere da expression ou se o caractere imediatamente antes dele é um operando*/
-	bool isUnary(int i);
+	bool isUnary(std::string expression, int i);
 	/**
 	* Transforma uma string de estrada em uma expressão expressão IN-fix.*/
-	void tokenize();
+	void tokenize(std::string expression);
 	/** Transforma experssão infixa em pos-fixa.*/
-	void infTOposFix();
+	void infTOpostFix();
 	/** Verifica erros na expresão.*/
 	void parse();
 	/** avalia a expressão posfixa.*/
@@ -63,11 +66,14 @@ public:
 	/** Chama os métodos necessários para resolver a expressão*/
 	void init();
 	
-	Bares(std::string expression);
+	Bares();
+	
+	//Bares(std::string expression);
 	~Bares();
 
 
 };
 
+#include "baresIO.hpp"
 #include "../src/bares.cpp"
 #endif

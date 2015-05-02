@@ -52,6 +52,10 @@ public:
 	* @return void
 	*/
 	void readFile(Queue<std::string> &expressions);
+	
+	/**remove todas as ocorrências do caractere c na string str*/
+	void removeCharacter(std::string& str, char c);
+	
 };
 
 #include "../src/baresIO.cpp"

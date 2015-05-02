@@ -1,3 +1,13 @@
+void BaresIO::removeCharacter(std::string& str, char c){
+		unsigned int i =0;
+		while(i<str.size()){
+			if(str[i] == c)
+				str = str.erase(i,1);
+			else
+				i++;
+		}
+	}
+
 BaresIO::BaresIO(std::string inputS, std::string outputS){
 	inputSFile = "data/"+inputS;
 	outputSFile = "data/"+outputS; 
@@ -31,6 +41,9 @@ void BaresIO::readFile(Queue<std::string> &expressions){
 	if(inputFile != NULL){
 		while((c = fgetc(inputFile)) != EOF){
 			if(c == '\n'){
+				removeCharacter(line, 32); //espaço
+				removeCharacter(line, 9); //tabulação
+				removeCharacter(line, 10); //nova linha
 				expressions.enqueue(line);
 				line = "";
 			}
@@ -38,6 +51,6 @@ void BaresIO::readFile(Queue<std::string> &expressions){
 		}
 		fclose(inputFile);
 	}else{
-		std::cout << "Arquivo não encontrado." << std::endl;
+		std::cout << "Arquivo não encontrado. Droga" << std::endl;
 	}
 }

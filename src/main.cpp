@@ -1,11 +1,9 @@
 #include <iostream>
 
 #include "../include/bares.hpp"
-#include "../include/baresIO.hpp"
+//#include "../include/baresIO.hpp"
 #define nullptr 0
-/**
- * criei o metodo isSymbol que é diferente de isOperator. isSymbol inclui parenteses, ja isOperator não considera parentesis.
- * */
+
 int main(int argc, char const *argv[])
 {
 	//int i;
@@ -23,7 +21,7 @@ int main(int argc, char const *argv[])
 	//Bares bares("3 ^ 2"); // 3 2 ^
 	//Bares bares("3 ~ 2"); // erro
 	//Bares bares("3 + 2 - 4"); // 3 2 + 4 -
-	Bares bares("3 % 2 * 4"); // 3 2 % 4 *
+	//Bares bares("3 % 2 * 4"); // 3 2 % 4 *
 	//Bares bares("3 * 2 +1 "); // 3 2 * 1 +
 	//Bares bares("3 + 2 * 1"); // 3 2 1 * +
 	//Bares bares("-3"); // 3 ~
@@ -52,18 +50,8 @@ int main(int argc, char const *argv[])
 	//Bares bares("(1 +  2 /3) %4 -5 *6 *7 +8 ^9 ");
 
 
-//Exemplo criado para testar a leituera e escrita de arquivos.
-	Queue<std::string> fila;
-	std::string aux;
-	//quando você passa só o arquivo de entrada ele joga diretamente na saída padrão.
-	//se passar dois parâmetros o segundo será o arquivo de saida.
-	BaresIO baresio = BaresIO("entrada.txt");
-	baresio.readFile(fila);
-	while(!fila.isEmpty()){
-		aux = fila.dequeue();
-		baresio.writeFile(aux);
-	}
-
-	//bares.init();
+	Bares bares;
+	bares.init();
+	
 	return 0;
 }

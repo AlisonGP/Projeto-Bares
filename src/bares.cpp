@@ -1,5 +1,9 @@
-	Bares::Bares(std::string expr){
-		expression = expr;
+	Bares::Bares(){
+		std::cout << "BARES:construtor default" << std::endl;
+	}
+	
+	/*Bares::Bares(std::string expr){
+		expressionsQueue.enqueue( expr);
 
 		std::cout << "BARES:construtor" << std::endl;
 		//expressionPOS.enqueue("3");
@@ -11,7 +15,7 @@
 	 	//expressionPOS.enqueue("*");
 		//expressionPOS.print();
 		//avaliate();
-	}
+	}*/
 	Bares::~Bares(){
 		/**
 			code here
@@ -29,7 +33,7 @@
 		}
 	}
 	
-	bool Bares::isUnary(int i){
+	bool Bares::isUnary(std::string expression, int i){
 		if(expression[i] == '-' || expression[i] == '~'){
 			//std::cout << "pode ser unario \n";
 			if(i==0){
@@ -51,13 +55,10 @@
 			return false;
 		}
 	}
-	void Bares::tokenize(){
-		std::cout << "TOKENIZE" << std::endl;
+	void Bares::tokenize(std::string expression){
+		std::cout << "TOKENIZE ";
 		
-		removeCharacter(expression, 32); //espaço
-		removeCharacter(expression, 9); //tabulação
 		int tam = expression.size();
-		std::cout << "espaco removido: \"" << expression<< "\" Size:"<< tam << std::endl;
 		
 		
 		std::string a = "";
@@ -77,15 +78,15 @@
 				
 				if(a != ""){
 					expressionINF.enqueue(a);
-					std::cout << "\"" << a << "\"" << std::endl;
-					std::cout <<"\"" << aux << "\""<< std::endl;
+					//std::cout << "\"" << a << "\"" << std::endl;
+					//std::cout <<"\"" << aux << "\""<< std::endl;
 				}else{
-					std::cout << "\"" << aux << "\""<< std::endl;
+					//std::cout << "\"" << aux << "\""<< std::endl;
 				}
 				
-				std::cout << "operador unario:" <<isUnary(i) << std::endl;
+				//std::cout << "operador unario:" <<isUnary(expression,i) << std::endl;
 				a = "";
-				if(isUnary(i))
+				if(isUnary(expression,i))
 					expressionINF.enqueue("~");
 				else
 				expressionINF.enqueue(aux);
@@ -94,7 +95,7 @@
 			i++;
 		}
 		if(a != ""){
-			std::cout << "\"" << a << "\"" << std::endl;
+			//std::cout << "\"" << a << "\"" << std::endl;
 			expressionINF.enqueue(a);
 		}
 	}
@@ -102,8 +103,8 @@
 /* Baseado no algoritmo de Stefan
  * http://stackoverflow.com/questions/12684086/convert-from-an-infix-expression-to-postfix-c-using-stacks
  * */
-	void Bares::infTOposFix(){
-		std::cout  << "INFTOPOSFIX" << std::endl;
+	void Bares::infTOpostFix(){
+		std::cout  << "INFTOPOSTFIX ";
 		operators.push("(");
 		std::string current;// = expressionINF.front();
 		//std::cout << current;
@@ -112,12 +113,12 @@
 		while(!expressionINF.isEmpty()){
 			current = expressionINF.front();
 			
-			std::cout << "." << current <<". "  ;
+			//std::cout << "." << current <<". "  ;
 			if("(" == current) { //se é um parentese aberto, coloca na pilha de operadores
-				std::cout << "parentese aberto" << std::endl ;
+				//std::cout << "parentese aberto" << std::endl ;
 				operators.push(expressionINF.dequeue());
 			}else if(")" == current) { // se é um parentese fechado
-				std::cout << "parentese fechado" << std::endl ;
+				//std::cout << "parentese fechado" << std::endl ;
 				while(!operators.isEmpty() && "(" != operators.top()) { //enquanto o topo da pilha não for um parentese fechado, esvazia a pilha
 					expressionPOS.enqueue(operators.pop() );
 				}
@@ -125,13 +126,13 @@
 				operators.pop();
 				expressionINF.dequeue();
 			}else if(isOperator(current)) { // se é um operador, coloca na pilha conforme a sua precedencia
-				std::cout << "operador" << std::endl ;
+				//std::cout << "operador" << std::endl ;
 				while(!operators.isEmpty() && isOperator(operators.top()) && prcd(operators.top(), current) && current != "~") {
 					expressionPOS.enqueue(operators.pop() );
 				}
 				operators.push(expressionINF.dequeue());
 			}else if(!isOperator( current )){ // se é um operando, coloca em expressionPOS
-				std::cout << "operando" << std::endl ;
+				//std::cout << "operando" << std::endl ;
 				expressionPOS.enqueue(expressionINF.dequeue());
 			}
 			
@@ -290,7 +291,7 @@
 	}
 	
 	void Bares::avaliate(){
-		std::cout<< "BARES:avaliate" << std::endl ;
+		std::cout<< "AVALIATE " ;
 		std::string  symb;
 		int opnd1, opnd2;
 		int resultado;
@@ -317,8 +318,15 @@
 				}
 			}
 		}
+		
 		resultado = operands.pop();
-		std::cout <<"resultado " <<resultado << std::endl;
+		//converte resultado (int) para string, com ajuda da biblioteca sstream 
+		std::ostringstream ss;
+		ss << resultado;
+		std::string str = ss.str();
+		//std::cout <<"resultado " <<str << std::endl;
+		expResult =  str;
+		
 	}
 	
 	//Verifica se o operador é binário ou unário.
@@ -376,15 +384,25 @@
 		*/
 	}
 
-	void Bares::init(){
-		/**
-			fazndo um teste
-		*/
-			tokenize();
-			std::cout << "1: ";
-			expressionINF.print();
-			infTOposFix();
-			std::cout << "expressionPOS"<<std::endl;
-			expressionPOS.print();
-			avaliate();
+void Bares::init(){
+		
+	std::string aux;
+	//quando você passa só o arquivo de entrada ele joga diretamente na saída padrão.
+	//se passar dois parâmetros o segundo será o arquivo de saida.
+	//BaresIO baresio = BaresIO("entrada.txt", "saida.txt");
+	BaresIO baresio = BaresIO("entrada.txt");
+	baresio.readFile(expressionsQueue);
+	
+	while(!expressionsQueue.isEmpty()){
+		aux = expressionsQueue.dequeue();
+		std::cout << "\"" <<aux << "\":" << std::endl;
+		tokenize(aux);
+		expressionINF.print();
+		infTOpostFix();
+		expressionPOS.print();
+		avaliate();
+		baresio.writeFile(expResult);
+		
+		std::cout <<std::endl;
 	}
+}
