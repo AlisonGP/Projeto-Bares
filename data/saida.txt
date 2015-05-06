@@ -1,1 +1,4 @@
-
+40
+Erro! coluna 3: operando inválido.
+5
+0

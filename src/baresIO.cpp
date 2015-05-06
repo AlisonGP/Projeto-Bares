@@ -18,6 +18,8 @@ BaresIO::BaresIO(std::string inputS){
 	inputSFile = "data/"+inputS;
 	stdOutput = true;
 }
+BaresIO::BaresIO(){
+}
 BaresIO::~BaresIO(){
 	std::cout << "Destrutor BaresIO" << std::endl;
 }

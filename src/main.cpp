@@ -6,6 +6,19 @@
 
 int main(int argc, char const *argv[])
 {
+	/*
+3
+3 + 6
+3 - 2
+3 * 2
+3 / 2
+3 % 2
+3 ^ 2
+- 2
+3 + 2 - 4
+(1 +   2)*	5
+
+	 * */
 	//int i;
 	//std::cout << "ANALISE DOS ARGUMENTOS" <<std::endl;
 	//for(i =0; i< argc; i++){

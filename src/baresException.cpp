@@ -31,16 +31,21 @@ bool BaresException::operandFaultException(){
 	baresIO.writeFile(message);
 }
 bool BaresException::invalidOperand(std::string operand, int pos){
-	if(isdigit(atoi(operand.c_str()))){
-		return false;
-	}else{
-		std::stringstream ss;
-		ss << pos;
-		std::string str = ss.str();
-		std::string message = "coluna"+ str + "operando invalido.\n";// += 'coluna '+pos+': operando invalido.\n';
-		baresIO.writeFile(message);
-		return true;
+	//std::cout << "pode ser operando  "<< operand<<  " tam:"<<operand.length()<< std::endl;
+	for(int i=0; i<operand.length(); i++){
+		//std::cout<<operand[i] << " ";
+		if(!isdigit(operand[i]))
+		{	
+			std::stringstream ss;
+			ss << pos;
+			std::string str = ss.str();
+			std::string message = "Erro! coluna "+ str + ": operando inválido.";// += 'coluna '+pos+': operando invalido.\n';
+			baresIO.writeFile(message);
+			return true;
+		}
+		
 	}
+	return false;
 	
 }
 bool BaresException::invalidOperator(std::string oper){
