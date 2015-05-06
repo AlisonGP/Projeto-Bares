@@ -279,8 +279,9 @@
 			return subtraction(opnd1, opnd2);
 		if(oper == "*")
 			return multiplication(opnd1, opnd2);
-		if(oper == "/")
+		if(oper == "/"){
 			return division(opnd1, opnd2);
+		}
 		if(oper == "%")
 			return modulo(opnd1, opnd2);
 		if(oper == "^")
@@ -299,6 +300,7 @@
 		int opnd1, opnd2;
 		int resultado;
 	int aux;
+	int pos = 1;
 
 		while(!expressionPOS.isEmpty()){
 			symb = expressionPOS.dequeue();
@@ -316,10 +318,13 @@
 				}else{
 					opnd1 = operands.pop();
 					opnd2 = operands.pop();
-					resultado = calculate(symb,opnd2, opnd1);
+					if(!baresEx.divideByZero(symb,opnd1, pos))
+						resultado = calculate(symb,opnd2, opnd1);
 					operands.push(resultado);
 				}
 			}
+			
+			pos++;
 		}
 		
 		resultado = operands.pop();
@@ -406,8 +411,10 @@ void Bares::init(){
 		infTOpostFix();
 		expressionPOS.print();
 		avaliate();
-		baresio.writeFile(expResult);
+		if(!baresEx.error == true)
+			baresio.writeFile(expResult);
 		
 		std::cout <<std::endl;
+		baresEx.error = false;
 	}
 }

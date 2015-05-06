@@ -7,6 +7,12 @@
 int main(int argc, char const *argv[])
 {
 	/*
+	 * 
+32767 *  4
+5+ t
+32768-1
+
+
 3
 3 + 6
 3 - 2

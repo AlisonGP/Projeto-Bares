@@ -76,7 +76,19 @@ bool BaresException::openScope(){
 	std::string message = "Parenteses de abertura não encontrado na coluna: i.";
 	baresIO.writeFile(message);
 }
-bool BaresException::divideByZero(){
-	std::string message = "Expressão resulta em uma divisão por zero na coluna i.";
-	baresIO.writeFile(message);
+bool BaresException::divideByZero(std::string oper, int opnd, int pos){
+	if(oper == "/" && opnd == 0)
+	{	
+		std::stringstream ss;
+		ss << pos;
+		std::string str = ss.str();
+		std::string message = "Erro! coluna "+ str + ": divisão por zero.";
+		baresIO.writeFile(message);
+		
+		//sinalizador da classe BaresException (recebe true quando algum erro foi encontrado)
+		error = true;
+		return true;
+	}else
+		return false;
+					
 }

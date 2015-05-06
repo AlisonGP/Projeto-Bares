@@ -12,8 +12,9 @@
 class BaresException
 {
 	BaresIO baresIO;
-	bool error;
+	
 public:
+	bool error;
 	BaresException(std::string ifile, std::string ofile);
 	BaresException(std::string ifile);
 	BaresException();
@@ -81,7 +82,7 @@ public:
 	* @return retorna verdadeiro caso haja erro e falso caso não haja.
 	* @see tokenize()
 	*/
-	bool divideByZero();
+	bool divideByZero(std::string oper,int opnd, int pos);
 };
 
 #include "../src/baresException.cpp"

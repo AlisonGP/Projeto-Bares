@@ -1,5 +1,4 @@
-131068
+Erro! coluna 3: divisão por zero.
+144
 Erro! coluna 3: operando inválido.
-5
-Erro! coluna 1: constante numérica inválida.
-32767
+Erro! coluna 6: divisão por zero.
