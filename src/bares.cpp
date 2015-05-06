@@ -109,7 +109,7 @@
 		std::string current;// = expressionINF.front();
 		//std::cout << current;
 		
-		
+		int pos = 1;
 		while(!expressionINF.isEmpty()){
 			current = expressionINF.front();
 			
@@ -133,9 +133,13 @@
 				operators.push(expressionINF.dequeue());
 			}else if(!isOperator( current )){ // se é um operando, coloca em expressionPOS
 				//std::cout << "operando" << std::endl ;
+				if(baresEx.invalidOperand(current, pos)){//erro operando invalido
+					continue;
+				}
 				expressionPOS.enqueue(expressionINF.dequeue());
 			}
 			
+			pos++;
 		}
 		
 		// Started with a left paren, now close it:
@@ -390,8 +394,10 @@ void Bares::init(){
 	//quando você passa só o arquivo de entrada ele joga diretamente na saída padrão.
 	//se passar dois parâmetros o segundo será o arquivo de saida.
 	//BaresIO baresio = BaresIO("entrada.txt", "saida.txt");
-	BaresIO baresio = BaresIO("entrada.txt");
+	BaresIO baresio = BaresIO("entrada.txt", "saida.txt");
 	baresio.readFile(expressionsQueue);
+
+	baresEx = BaresException("entrada.txt", "saida.txt");
 	
 	while(!expressionsQueue.isEmpty()){
 		aux = expressionsQueue.dequeue();

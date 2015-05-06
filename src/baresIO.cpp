@@ -10,7 +10,9 @@ void BaresIO::removeCharacter(std::string& str, char c){
 
 BaresIO::BaresIO(std::string inputS, std::string outputS){
 	inputSFile = "data/"+inputS;
-	outputSFile = "data/"+outputS; 
+	outputSFile = "data/"+outputS;
+
+	clearFile(); 
 }
 BaresIO::BaresIO(std::string inputS){
 	inputSFile = "data/"+inputS;
@@ -19,7 +21,20 @@ BaresIO::BaresIO(std::string inputS){
 BaresIO::~BaresIO(){
 	std::cout << "Destrutor BaresIO" << std::endl;
 }
+void BaresIO::clearFile(){
+	std::FILE *outputFile;
+	outputFile = fopen(outputSFile.c_str(),"w");
+
+	if(outputFile != NULL){
+		//const char * c;
+		fputs("", outputFile);
+		fclose(outputFile);
+	}else{
+		std::cout << "Arquivo de saida não existe" << std::endl;
+	}
+}
 void BaresIO::writeFile(std::string result){
+	result = result + "\n";
 	std::FILE *outputFile;
 	outputFile = fopen(outputSFile.c_str(),"a");
 

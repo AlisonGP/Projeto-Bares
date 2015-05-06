@@ -34,10 +34,25 @@ public:
 	*/
 	BaresIO(std::string inputS);
 	/**
+	* Método construtor da classe BaresIO.
+	* Construtor default.
+	* @see init()
+	* @see BaresException()
+	* @return
+	*/
+	BaresIO();
+	/**
 	* Método destrutor da classe BaresIO.
 	* @return
 	*/
 	~BaresIO();
+	/**
+	* Apaga todos os dados do arquivo de saída.
+	* @see BaresIO()
+	* @return void
+	*/
+	void clearFile();
+
 	/**
 	* Escreve em um arquivo informado pelo usuário o resultado do calculo do bares ou um mensagem de erro.
 	* @param result string como resultado do calculo do bares ou a mensagem de erro.

@@ -5,6 +5,7 @@
 #include <string>
 #include <sstream>
 #include <stdlib.h>
+#include "baresException.hpp"
 class Bares{
 	//Atributos
 	Queue<std::string> expressionsQueue;
@@ -13,7 +14,8 @@ class Bares{
 	Queue<std::string> expressionPOS;
 	Stack<std::string> operators;
 	Stack<int> operands;
-	Queue<std::string> messageError;
+	//Queue<std::string> messageError;
+	BaresException baresEx;
 	std::string expResult;
 
 	//Métodos
@@ -75,5 +77,6 @@ public:
 };
 
 #include "baresIO.hpp"
+#include "baresException.hpp"
 #include "../src/bares.cpp"
 #endif

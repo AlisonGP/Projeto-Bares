@@ -2,6 +2,7 @@
 #define	__BARESEXCEPTION__
 
 #include <iostream>
+#include <sstream>
 #include "baresIO.hpp"
 /**
 * @autor Alison Jhonas
@@ -14,6 +15,7 @@ class BaresException
 public:
 	BaresException(std::string ifile, std::string ofile);
 	BaresException(std::string ifile);
+	BaresException();
 	~BaresException();
 	/**
 	* Verifica se o operando está dentro do intervalo inteiro.
@@ -23,7 +25,7 @@ public:
 	* @see tokenize()
 	* @see avaliate()
 	*/
-	bool invalidNumericConstantException(string operand);
+	bool invalidNumericConstantException(std::string operand);
 	bool invalidNumericConstantException(int operand);
 	
 	/**
@@ -38,10 +40,11 @@ public:
 	* Verifica se o parâmetro é um operando inválido.
 	* recebe uma string e verifica se é um operando válido.
 	* @param operand string que será avaliada.
+	* @param pos posição do operando na expressão
 	* @return retorna verdadeiro caso haja erro e falso caso não haja.
 	* @see tokenize()
 	*/
-	bool invalidOperand(String operand);
+	bool invalidOperand(std::string operand, int pos);
 
 	/**
 	* Verifica se o parâmetro é um operador inválido.
@@ -50,7 +53,7 @@ public:
 	* @return retorna verdadeiro caso haja erro e falso caso não haja.
 	* @see tokenize()
 	*/
-	bool invalidOperator(String operator);
+	bool invalidOperator(std::string oper);
 
 	/**
 	* Verifica se o parâmetro é um operador inválido.
@@ -59,7 +62,7 @@ public:
 	* @return retorna verdadeiro caso haja erro e falso caso não haja.
 	* @see tokenize()
 	*/
-	bool operatorFault(String operator);
+	bool operatorFault(std::string oper);
 	/**
 	* Verifica se na expressão possui algum parenteses fechamento sem o seu correspondente de abertura.
 	* @return retorna verdadeiro caso haja erro e falso caso não haja.
