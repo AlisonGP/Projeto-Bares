@@ -1,24 +1,33 @@
 BaresException::BaresException(std::string ifile, std::string ofile){
 	baresIO = BaresIO(ifile, ofile);
+	error = false;
 }
 BaresException::BaresException(std::string ifile){
 	baresIO = BaresIO(ifile);
+	error = false;
 }
 BaresException::BaresException(){
-
+	error = false;
 }
 BaresException::~BaresException(){
 	std::cout << "Destrutor BaresException" << std::endl; 
 }
-bool BaresException::invalidNumericConstantException(std::string operand){
+bool BaresException::invalidNumericConstant(std::string operand, int pos){
+	
 	if(atoi(operand.c_str()) > 32767){
-	std::string message = "Operando fora da faixa permitida\nFaixa de valores permetido: -32767 a 32767.";
-	baresIO.writeFile(message);
-	return false;
+		std::stringstream ss;
+		ss << pos;
+		std::string str = ss.str();
+		std::string message = "Erro! coluna "+ str + ": constante numérica inválida.";
+		baresIO.writeFile(message);
+		
+		//sinalizador da classe BaresException (recebe true quando algum erro foi encontrado)
+		error = true;
+		return true;
 	}
-	return true;
+	return false;
 }
-bool BaresException::invalidNumericConstantException(int operand){
+bool BaresException::invalidNumericConstant(int operand){
 	if(operand > 32767){
 	std::string message = "Operando fora da faixa permitida\nFaixa de valores permetido: -32767 a 32767.";
 	baresIO.writeFile(message);
@@ -41,6 +50,9 @@ bool BaresException::invalidOperand(std::string operand, int pos){
 			std::string str = ss.str();
 			std::string message = "Erro! coluna "+ str + ": operando inválido.";// += 'coluna '+pos+': operando invalido.\n';
 			baresIO.writeFile(message);
+			
+			//sinalizador da classe BaresException (recebe true quando algum erro foi encontrado)
+			error = true;
 			return true;
 		}
 		

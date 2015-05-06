@@ -1,5 +1,4 @@
 	Bares::Bares(){
-		error = false;
 		std::cout << "BARES:construtor default" << std::endl;
 	}
 	
@@ -133,9 +132,8 @@
 				}
 				operators.push(expressionINF.dequeue());
 			}else if(!isOperator( current )){ // se é um operando, coloca em expressionPOS
-				if(baresEx.invalidOperand(current, pos)){
-					error = true;
-					//std::cout << current <<": erro operando invalido" << std::endl;//continue;
+				if(!baresEx.invalidOperand(current, pos)){
+					baresEx.invalidNumericConstant(current, pos);
 				}
 				expressionPOS.enqueue(expressionINF.dequeue());
 			}

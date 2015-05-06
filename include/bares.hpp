@@ -17,7 +17,7 @@ class Bares{
 	Stack<int> operands;
 	//Queue<std::string> messageError;
 	BaresException baresEx;
-	bool error;
+	
 	std::string expResult;
 
 	//Métodos

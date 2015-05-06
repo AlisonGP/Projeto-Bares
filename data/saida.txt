@@ -1,4 +1,5 @@
-40
+131068
 Erro! coluna 3: operando inválido.
 5
-0
+Erro! coluna 1: constante numérica inválida.
+32767

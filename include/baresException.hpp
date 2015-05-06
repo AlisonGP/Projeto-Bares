@@ -12,6 +12,7 @@
 class BaresException
 {
 	BaresIO baresIO;
+	bool error;
 public:
 	BaresException(std::string ifile, std::string ofile);
 	BaresException(std::string ifile);
@@ -25,8 +26,8 @@ public:
 	* @see tokenize()
 	* @see avaliate()
 	*/
-	bool invalidNumericConstantException(std::string operand);
-	bool invalidNumericConstantException(int operand);
+	bool invalidNumericConstant(std::string operand, int pos);
+	bool invalidNumericConstant(int operand);
 	
 	/**
 	* Verifica se a operação unária ou binária possui a quantidade correta de operandos.
