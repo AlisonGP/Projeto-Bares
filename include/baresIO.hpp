@@ -5,7 +5,7 @@
 #include <cstdio>
 #include "queue.hpp"
 /**
-* @autor Alison Jhonas & Gilmar Andrade
+* @author Alison Jhonas & Gilmar Andrade
 * @version 1.1
 * @since April 29, 2015
 */
@@ -33,26 +33,26 @@ class BaresIO
 public:
 	/**
 	* Método construtor da classe BaresIO.
-	* Recece os nomes dos arquivos de entrada e saida utilizados pela clsse.
+	* Recebe os nomes dos arquivos de entrada e saída utilizados pela classe.
 	* @param inputS string como o nome do arquivo de entrada
 	* @param outputS string como o nome do arquivo de saida
-	* @see init()
+	* @see Bares::init()
 	* @return
 	*/
 	BaresIO(std::string inputS, std::string outputS);
 	/**
 	* Método construtor da classe BaresIO.
-	* Recebe o nome do arquivo de entrada utilizado pela classe e define a saida como saida padrão.
+	* Recebe o nome do arquivo de entrada utilizado pela classe e define a saída como saída padrão.
 	* @param inputS string como o nome do arquivo de entrada
-	* @see init()
+	* @see Bares::init()
 	* @return
 	*/
 	BaresIO(std::string inputS);
 	/**
 	* Método construtor da classe BaresIO.
 	* Construtor default.
-	* @see init()
-	* @see BaresException()
+	* @see Bares::init()
+	* @see BaresException
 	* @return
 	*/
 	BaresIO();
@@ -69,16 +69,16 @@ public:
 	void clearFile();
 
 	/**
-	* Escreve em um arquivo informado pelo usuário o resultado do calculo do bares ou um mensagem de erro.
-	* @param result string com o resultado do calculo do bares ou a mensagem de erro.
-	* @see init()
+	* Escreve em um arquivo informado pelo usuário o resultado do cálculo do bares ou um mensagem de erro.
+	* @param result string com o resultado do cálculo do bares ou a mensagem de erro.
+	* @see Bares::init()
 	* @return void
 	*/
 	void writeFile(std::string result);
 	/**
 	* Lê as expressões aritiméticas de um arquivo informado pelo usuário e armazena em uma lista de expressões(string).
-	* @param expresseions lista do tipo string que conterá as expressões lidas do arquivo.
-	* @see init()
+	* @param expressions lista do tipo string que conterá as expressões lidas do arquivo.
+	* @see Bares::init()
 	* @return void
 	*/
 	void readFile(Queue<std::string> &expressions);

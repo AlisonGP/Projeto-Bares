@@ -5,17 +5,17 @@
 #include <sstream>
 #include "baresIO.hpp"
 /**
-* @autor Alison Jhonas & Gilmar Andrade
+* @author Alison Jhonas & Gilmar Andrade
 * @version 1.1
 * @since April 29, 2015
 */
-/*
+/**
 * Classe BaresException.
 * Localiza erros nas expressões e exibe mensagens de erro na saída padrão, ou armazena no arquivo de saída.
 */
 class BaresException
 {
-	/*
+	/**
 	* Objeto da classe BaresIO.
 	* Usado para escrita em arquivo ou na saída padrão.
 	*/
@@ -27,26 +27,26 @@ public:
 	 */
 	bool error;
 	
-	/*
+	/**
 	* Construtor.
 	* Utilizado quando existe um arquivo se saída.
 	* @param ifile nome do arquivo de entrada.
 	* @param ofile nome do arquivo de saída.
-	* @see init()
+	* @see Bares::init()
 	*/
 	BaresException(std::string ifile, std::string ofile);
-	/*
+	/**
 	* Construtor.
 	* Utilizado quando não existe um arquivo se saída.
 	* @param ifile nome do arquivo de entrada.
-	* @see init()
+	* @see Bares::init()
 	*/
 	BaresException(std::string ifile);
-	/*
+	/**
 	* Construtor default.
 	*/
 	BaresException();
-	/*
+	/**
 	* Destrutor default.
 	*/
 	~BaresException();
@@ -56,17 +56,19 @@ public:
 	* @param operand operando que será avaliado.
 	* @param pos coluna do operando na expressão.
 	* @return retorna verdadeiro caso haja erro e falso caso não haja.
-	* @see tokenize()
-	* @see avaliate()
+	* @see Bares::tokenize()
+	* @see Bares::avaliate()
 	*/
 	bool invalidNumericConstant(std::string operand, int pos);
 	
 	
 	/**
+	* Falta de operando.
 	* Verifica se a operação unária ou binária possui a quantidade correta de operandos.
 	* @return retorna verdadeiro caso haja erro e falso caso não haja.
-	* @see tokenize()
-	* @see avaliate()
+	* @param pos coluna esperada do operando.
+	* @see Bares::tokenize()
+	* @see Bares::avaliate()
 	*/
 	void operandFault(int pos);
 	
@@ -76,37 +78,39 @@ public:
 	* @param operand string que será avaliada.
 	* @param pos coluna do operando na expressão
 	* @return retorna verdadeiro caso haja erro e falso caso não haja.
-	* @see tokenize()
+	* @see Bares::tokenize()
 	*/
 	bool invalidOperand(std::string operand, int pos);
 
 	/**
 	* Verifica se o parâmetro é um operador inválido.
-	* recebe uma string e verifica se é um operador válido.
+	* Método não implementado.
+	* @deprecated
 	* @param operator string que será avaliada.
 	* @return retorna verdadeiro caso haja erro e falso caso não haja.
-	* @see tokenize()
 	*/
 	bool invalidOperator(std::string oper);
 
 	/**
-	* Verifica se o parâmetro é um operador inválido.
-	* recebe uma string e verifica se é um operador válido.
+	* Verifica se falta um operador.
+	* Método não implementado.
+	* @deprecated
 	* @param operator string que será avaliada.
 	* @return retorna verdadeiro caso haja erro e falso caso não haja.
-	* @see tokenize()
 	*/
 	bool operatorFault(std::string oper);
 	/**
 	* Verifica se na expressão possui algum parenteses fechamento sem o seu correspondente de abertura.
+	* Método não implementado.
+	* @deprecated
 	* @return retorna verdadeiro caso haja erro e falso caso não haja.
-	* @see tokenize()
 	*/
 	bool invalidScopeClosing();
 	/**
 	* Verifica se na expressão possui algum parenteses abertura sem o seu correspondente de fechamento.
+	* Método não implementado.
+	* @deprecated
 	* @return retorna verdadeiro caso haja erro e falso caso não haja.
-	* @see tokenize()
 	*/
 	bool openScope();
 	/**
@@ -116,7 +120,7 @@ public:
 	* @param opnd segundo operando.
 	* @param pos coluna do segundo operando.
 	* @return retorna verdadeiro caso haja erro e falso caso não haja.
-	* @see tokenize()
+	* @see Bares::avaliate()
 	*/
 	bool divideByZero(std::string oper,int opnd, int pos);
 };

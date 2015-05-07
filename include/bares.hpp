@@ -8,7 +8,7 @@
 #include "baresIO.hpp"
 #include "baresException.hpp"
 /**
-* @autor Alison Jhonas & Gilmar Andrade
+* @author Alison Jhonas & Gilmar Andrade
 * @version 1.1
 * @since April 21, 2015
 */
@@ -81,7 +81,7 @@ class Bares{
 	
 	/** 
 	 * Verifica erros na expresão.
-	 * Método não utilizado.
+	 * Método não implementado.
 	 * @deprecated
 	 * @return void
 	 * */
@@ -124,6 +124,10 @@ class Bares{
 	
 	/** 
 	 * Retorna o resultado da divisão.
+	 * @param a primeiro operando.
+	 * @param b segundo operando.
+	 * @see calculate()
+	 * @return a / b
 	 * */
 	int division(int a, int b);
 	
