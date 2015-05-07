@@ -68,6 +68,6 @@ void BaresIO::readFile(Queue<std::string> &expressions){
 		}
 		fclose(inputFile);
 	}else{
-		std::cout << "Arquivo não encontrado. Droga" << std::endl;
+		std::cout << "Arquivo de entrada não encontrado." << std::endl;
 	}
 }

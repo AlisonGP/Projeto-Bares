@@ -6,6 +6,20 @@
 
 int main(int argc, char const *argv[])
 {
+	std::string input, output;
+
+	
+	if(argc <= 1 || argc > 3)
+		std::cout << "Erro: parametros incorretos." <<std::endl;
+	else{
+		input = argv[1];
+		if(argc == 3)
+			output = argv[2];
+		
+		Bares bares;
+		bares.init(input, output);
+	}
+	
 	/*
 	 * 
 32767 *  4
@@ -69,8 +83,7 @@ int main(int argc, char const *argv[])
 	//Bares bares("(1 +  2 /3) %4 -5 *6 *7 +8 ^9 ");
 
 
-	Bares bares;
-	bares.init();
+	
 	
 	return 0;
 }

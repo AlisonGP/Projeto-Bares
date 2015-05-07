@@ -392,17 +392,21 @@
 		*/
 	}
 
-void Bares::init(){
+void Bares::init(std::string input, std::string output){
+	
+	BaresIO baresio;
+	if(output.empty()){
+		baresio = BaresIO(input);
+		baresEx = BaresException(input);
+	}else{
+		baresio = BaresIO(input, output);
+		baresEx = BaresException(input, output);
+	}
 		
-	std::string aux;
-	//quando você passa só o arquivo de entrada ele joga diretamente na saída padrão.
-	//se passar dois parâmetros o segundo será o arquivo de saida.
-	//BaresIO baresio = BaresIO("entrada.txt", "saida.txt");
-	BaresIO baresio = BaresIO("entrada.txt", "saida.txt");
+		
 	baresio.readFile(expressionsQueue);
 
-	baresEx = BaresException("entrada.txt", "saida.txt");
-	
+	std::string aux;
 	while(!expressionsQueue.isEmpty()){
 		aux = expressionsQueue.dequeue();
 		std::cout << "\"" <<aux << "\":" << std::endl;

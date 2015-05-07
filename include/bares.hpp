@@ -68,7 +68,7 @@ class Bares{
 
 public:
 	/** Chama os métodos necessários para resolver a expressão*/
-	void init();
+	void init(std::string input, std::string output = nullptr);
 	
 	Bares();
 	
