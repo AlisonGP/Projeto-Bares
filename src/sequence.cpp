@@ -1,8 +1,6 @@
-//#include "sequence.hpp"
 #include <iostream>
 template <typename TYPE>
 void Sequence<TYPE>::swap(Node *n1, Node *n2){
-	//std::cout << "swap" << std::endl;
 	Node *nextaux, *prevaux;
 
 	if(list.next == n1){
@@ -29,15 +27,11 @@ void Sequence<TYPE>::swap(Node *n1, Node *n2){
 			n1 = n2;
 			n2 = aux;
 		}
-		//std::cout<<" faca isso";
 		prevN1 = n1->prev;
 		nextN1 = n1->next->next;
 		prevN2 = n2->prev->prev;
 		nextN2 = n2->next;
-		
-		//std::cout<<"entrei assim n1="<<n1->data<< " n1->prev="<<prevN1->data<< " n1->prev->next="<<prevN1->next->data << " n1->next="<<nextN1->data<< " n1->next->prev="<<nextN1->prev->data<< std::endl;
-		//std::cout<<"             n2="<<n2->data<< " n2->prev="<<prevN2->data<< " n2->prev->next="<<prevN2->next->data << " n2->next="<<nextN2->data<< " n2->next->prev="<<nextN2->prev->data<< std::endl;
-
+	
 		n1->next = nextN2;
 		n1->prev = n2;
 		n2->next = n1;
@@ -49,37 +43,11 @@ void Sequence<TYPE>::swap(Node *n1, Node *n2){
 		nextN2->prev = n1;
 	
 	}
-	/*else if( n2->next == n1){
-		std::cout<<" nao faça isso";
-		prevN1 = n1->prev->prev;
-		nextN1 = n1->next;
-		prevN2 = n2->prev;
-		nextN2 = n2->next->next;
-		
-		//std::cout<<"entrei assim n1="<<n1->data<< " n1->prev="<<prevN1->data<< " n1->prev->next="<<prevN1->next->data << " n1->next="<<nextN1->data<< " n1->next->prev="<<nextN1->prev->data<< std::endl;
-		//std::cout<<"             n2="<<n2->data<< " n2->prev="<<prevN2->data<< " n2->prev->next="<<prevN2->next->data << " n2->next="<<nextN2->data<< " n2->next->prev="<<nextN2->prev->data<< std::endl;
-
-		
-		n1->next = n2;
-		n1->prev = prevN2;
-		n2->next = nextN1;
-		n2->prev = n1;
-		
-		if(prevN2 != nullptr)
-		prevN2->next = n1;
-		if(nextN1 != nullptr)
-		nextN1->prev = n2;
-
-			
-	}*/else{
+	else{
 		prevN1 = n1->prev;
 		nextN1 = n1->next;
 		prevN2 = n2->prev;
 		nextN2 = n2->next;
-		
-		//std::cout<<"entrei assim n1="<<n1->data<< " n1->prev="<<prevN1->data<< " n1->prev->next="<<prevN1->next->data << " n1->next="<<nextN1->data<< " n1->next->prev="<<nextN1->prev->data<< std::endl;
-		//std::cout<<"             n2="<<n2->data<< " n2->prev="<<prevN2->data<< " n2->prev->next="<<prevN2->next->data << " n2->next="<<nextN2->data<< " n2->next->prev="<<nextN2->prev->data<< std::endl;
-
 
 		n1->next = nextN2;
 		n1->prev = prevN2;
@@ -97,79 +65,23 @@ void Sequence<TYPE>::swap(Node *n1, Node *n2){
 		nextN2->prev = n1;
 	}
 	
-/*	
-	n1->next = nextN2;
-	n1->prev = prevN2;
-	n2->next = nextN1;
-	n2->prev = prevN1;
-	
-	if(prevN1 != nullptr)
-	prevN1->next = n2;
-	if(prevN2 != nullptr)
-	prevN2->next = n1;
-	
-	if(nextN1 != nullptr)
-	nextN1->prev = n2;
-	if(nextN2 != nullptr)
-	nextN2->prev = n1;
-
-	*/
-	//std::cout<<"fiquei assim n1="<<n1->data<< " n1->prev="<<prevN1->data<< " n1->prev->next="<<prevN1->next->data << " n1->next="<<nextN1->data<< " n1->next->prev="<<nextN1->prev->data<< std::endl;
-	//std::cout<<"             n2="<<n2->data<< " n2->prev="<<prevN2->data<< " n2->prev->next="<<prevN2->next->data << " n2->next="<<nextN2->data<< " n2->next->prev="<<nextN2->prev->data<< std::endl;
-		
-	/*
-	std::cout<<" entrei aqui n1="<<n1->data<< " n1->prev="<<n1->prev->data<< " n1->prev->next="<<n1->prev->next->data << std::endl;
-	std::cout<<"             n2="<<n2->data<< " n2->prev="<<n2->prev->data<< " n2->prev->next="<<n2->prev->next->data << std::endl;
-	if(n1->prev != nullptr){	
-	
-		n1->prev->next = n2;
-	}
-	if(n2->prev != nullptr)
-		n2->prev->next = n1;
-	if(n1->next != nullptr)
-		n1->next->prev = n2;
-	if(n2->next != nullptr)
-		n2->next->prev = n1;
-	
-	
-	
-	nextaux = n1->next;
-	prevaux = n1->prev;
-	
-	n1->next = n2->next;
-	n1->prev = n2->prev;
-	
-	n2->next = nextaux;
-	n2->prev = prevaux;
-	
-	std::cout<<"agora fiquei n1="<<n1->data<< " n1->prev="<<n1->prev->data<< " n1->prev->next="<<n1->prev->next->data << std::endl;
-	std::cout<<"             n2="<<n2->data<< " n2->prev="<<n2->prev->data<< " n2->prev->next="<<n2->prev->next->data << std::endl;
-	*/
 }
 
 template <typename TYPE>
 Sequence<TYPE>::Sequence() {
-	//std::cout << "construtor" << std::endl;
 }
 
 template <typename TYPE>
 Sequence<TYPE>::Sequence(const Sequence<TYPE> &s){
-	//std::cout<<"construtor de copia"<<std::endl;
-	//Node *aux = &list;
-	
-	//aux->next = 
-	//Node aux = new Node(nullptr, nullptr);
 	Node *aux = &s.list;
 	while(aux->next != nullptr){
 		addLast(aux->next->data);
 		aux = aux->next;
 	}
-	//print();
 }
 
 template <typename TYPE>
 Sequence<TYPE>::~Sequence() {
-	//std::cout << "destrutor" << std::endl;
 	Node *node = list.next;
 	Node *aux;
 	if(list.next!= nullptr){
@@ -184,7 +96,6 @@ Sequence<TYPE>::~Sequence() {
 
 template <typename TYPE>
 bool Sequence<TYPE>::operator==( Sequence<TYPE> &s){
-	//std::cout<< "operador de comparacao"<< std::endl;
 	if(getSize() != s.getSize())
 		return false;
 	else{
@@ -203,7 +114,6 @@ bool Sequence<TYPE>::operator==( Sequence<TYPE> &s){
 
 template <typename TYPE>
 bool Sequence<TYPE>::isEmpty() {
-	//std::cout << "isEmpty()"<<std::endl;
 	if(list.next == nullptr && list.prev == nullptr)
 		return true;
 	else
@@ -212,7 +122,6 @@ bool Sequence<TYPE>::isEmpty() {
 
 template <typename TYPE>
 int Sequence<TYPE>::getSize() {
-	//std::cout << "getSize"<<std::endl;
 	if(list.next == nullptr && list.prev == nullptr)
 	{
 			return 0;
@@ -230,7 +139,6 @@ int Sequence<TYPE>::getSize() {
 
 template <typename TYPE>
 bool Sequence<TYPE>::addFirst(const TYPE &value) {
-	//std::cout << "addFirst()" << std::endl;
 	
 	Node *novo = new Node;
 	if(novo == nullptr)
@@ -252,8 +160,6 @@ bool Sequence<TYPE>::addFirst(const TYPE &value) {
 
 template <typename TYPE>
 bool Sequence<TYPE>::addLast(const TYPE &value) {
-	//std::cout << "addLast()" << std::endl;
-	
 	Node *novo = new Node;
 	if(novo == nullptr)
 		return false;
@@ -275,7 +181,6 @@ bool Sequence<TYPE>::addLast(const TYPE &value) {
 
 template <typename TYPE>
 bool Sequence<TYPE>::add(const TYPE &value, int pos) {
-	//std::cout << "add" << std::endl;
 	if(pos<0){
 		return addFirst(value);
 	}else if(pos> getSize()-1){
@@ -304,9 +209,7 @@ bool Sequence<TYPE>::add(const TYPE &value, int pos) {
 
 template <typename TYPE>
 TYPE Sequence<TYPE>::removeFirst() {
-	//std::cout << "RemoveFirst()" << std::endl;
 	if(isEmpty()){
-		//std::cout << "Não foi possível remover, lista vazia" << std::endl;
 	}else{
 		TYPE data;
 		if(getSize() == 1)
@@ -331,9 +234,7 @@ TYPE Sequence<TYPE>::removeFirst() {
 
 template <typename TYPE>
 TYPE Sequence<TYPE>::removeLast() {
-	//std::cout << "RemoveLast()" << std::endl;
 	if(isEmpty()){
-		//std::cout << "Não foi possível remover, lista vazia" << std::endl;
 	}else{
 		TYPE data;
 		if(getSize() == 1)
@@ -361,9 +262,7 @@ TYPE Sequence<TYPE>::removeLast() {
 
 template <typename TYPE>
 TYPE Sequence<TYPE>::remove(int pos) {
-	//std::cout << "remove" << std::endl;
 	if(pos<0 || pos>getSize()-1){
-		//std::cout << "nao foi possivel remover, fora do intervalo" <<std::endl;
 	}else{
 		
 		if(pos == 0)
@@ -386,25 +285,18 @@ TYPE Sequence<TYPE>::remove(int pos) {
 				return value;
 					
 			}
-		
-		
-		
-			
-			
 	
 	}
 }
 
 template <typename TYPE>
 TYPE Sequence<TYPE>::getFirst() {
-	//std::cout << "getFirst:" << std::endl;
 	if(!isEmpty())
 		return list.next->data;
 }
 
 template <typename TYPE>
 TYPE Sequence<TYPE>::getLast() {
-	//std::cout << "getLast:" << std::endl;
 	if(!isEmpty()){
 		Node *node = &list;
 		while(node->next != nullptr){
@@ -416,7 +308,6 @@ TYPE Sequence<TYPE>::getLast() {
 
 template <typename TYPE>
 TYPE Sequence<TYPE>::get(int pos) {
-	//std::cout << "get:" << std::endl;
 	if(pos>=0 && pos<getSize()){
 			Node *node = &list;
 			while(pos>0){
@@ -430,7 +321,6 @@ TYPE Sequence<TYPE>::get(int pos) {
 
 template <typename TYPE>
 int Sequence<TYPE>::search(const TYPE &elm) {
-	//std::cout << "search"<< std::endl;
 	Node *node = &list;
 	int pos = 0;
 	while(node->next != nullptr){
@@ -444,28 +334,11 @@ int Sequence<TYPE>::search(const TYPE &elm) {
 
 template <typename TYPE>
 bool Sequence<TYPE>::isEqual(Sequence<TYPE> &s) {
-	//std::cout<< "isEqual"<< std::endl;
-	/*std::cout<< "isEqual"<< std::endl;
-	if(getSize() != s.getSize())
-		return false;
-	else{
-		Node *n1 = &list;
-		Node *n2 = &(s.list);
-		
-		while(n1->next != nullptr){
-			if(n1->next->data != n2->next->data)
-				return false;
-			n1 = n1->next;
-			n2 = n2->next;
-		}
-		return true;
-	}*/
 	return *this == s;
 }
 
 template <typename TYPE>
 void Sequence<TYPE>::reverse() {
-	//std::cout << "reverse" << std::endl;
 	int i,j, posi, posj;
 	Node *nodei, *nodej;
 	for(i = 0, j=getSize()-1; i<getSize()/2; i++, j--){
@@ -485,8 +358,6 @@ void Sequence<TYPE>::reverse() {
 			posj--;
 		}
 		nodej = nodej->next;
-		
-		//std::cout << nodei->data << "  " << nodej->data << std::endl;
 		swap(nodej, nodei);
 		
 		
@@ -496,8 +367,7 @@ void Sequence<TYPE>::reverse() {
 }
 
 template <typename TYPE>
-bool Sequence<TYPE>::isIncreasing(){
-	//std::cout << "isIncreasing";
+bool Sequence<TYPE>::isIncreasing(){	
 	
 	Node *aux = &list;
 	while(aux->next !=nullptr){
@@ -511,7 +381,6 @@ bool Sequence<TYPE>::isIncreasing(){
 
 template <typename TYPE>
 bool Sequence<TYPE>::isDecreasing(){
-	//std::cout << "isDecreasing";
 	
 	if(isIncreasing())
 		return false;
@@ -521,7 +390,6 @@ bool Sequence<TYPE>::isDecreasing(){
 
 template <typename TYPE>
 void Sequence<TYPE>::bounds(TYPE &min, TYPE &max){
-	//std::cout<<"bounds"<<std::endl;
 	Node *node = &list;
 	min = max= node->next->data;
 	node = node->next;
@@ -537,7 +405,6 @@ void Sequence<TYPE>::bounds(TYPE &min, TYPE &max){
 
 template <typename TYPE>
 void Sequence<TYPE>::sort() {
-	//std::cout << "sort" << std::endl;
 	int i,j, posA, posB;
 	Node *nodeA, *nodeB;
 	
@@ -562,10 +429,7 @@ void Sequence<TYPE>::sort() {
 			
 			
 			if(nodeA->data > nodeB->data){
-				//std::cout << nodeA->data << " " << nodeB->data << std::endl;
 				swap(nodeA, nodeB);
-				//std::cout<<"print";
-				//print();
 			}
 		}
 	}
@@ -575,7 +439,7 @@ template <typename TYPE>
 void Sequence<TYPE>::print() {
 	Node *aux = list.next;
 	while(aux != nullptr){
-		std::cout << aux->data<< ".";// << std::endl; 
+		std::cout << aux->data<< ".";
 		aux = aux->next;
 	}
 	std::cout<< std::endl; 

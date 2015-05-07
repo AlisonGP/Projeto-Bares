@@ -191,7 +191,7 @@ class Bares{
 	 * Verifica se a string é um operador.
 	 * Verifica se é um símbolo de operador vãlido, não considera parenteses.
 	 * @param symb string que contém o elemento a ser verificado.
-	 * @see infTOposFix()
+	 * @see infTOpostFix()
 	 * @see avaliate()
 	 * @return true se a string é um dos operadores: + - * / % ^ ~ 
 	 * */

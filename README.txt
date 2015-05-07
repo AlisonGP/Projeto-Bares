@@ -22,7 +22,7 @@ Caso esteja no Linux: bin/prog <arquivo de entrada> [arquivo de saida]
 Caso esteja no Windows: bin/prog.exe <arquivo de entrada> [arquivo de saida]
 Limitações: Os arquivos de entrada e saída devem estar obrigatoriamente na pasta /data do Projeto Bares.
 
-Tratamento de error:
+Tratamento de erro:
 O programa trata os seguintes erros.
 - Constante numérica inválida.
 - Falta de operando.

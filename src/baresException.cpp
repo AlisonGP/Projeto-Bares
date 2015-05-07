@@ -10,7 +10,7 @@ BaresException::BaresException(){
 	error = false;
 }
 BaresException::~BaresException(){
-	//std::cout << "Destrutor BaresException" << std::endl; 
+	
 }
 bool BaresException::invalidNumericConstant(std::string operand, int pos){
 	
@@ -40,9 +40,7 @@ void BaresException::operandFault(int pos){
 	
 }
 bool BaresException::invalidOperand(std::string operand, int pos){
-	//std::cout << "pode ser operando  "<< operand<<  " tam:"<<operand.length()<< std::endl;
 	for(int i=0; i<operand.length(); i++){
-		//std::cout<<operand[i] << " ";
 		if(!isdigit(operand[i]))
 		{	
 			std::stringstream ss;

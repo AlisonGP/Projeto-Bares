@@ -21,14 +21,14 @@ BaresIO::BaresIO(std::string inputS){
 BaresIO::BaresIO(){
 }
 BaresIO::~BaresIO(){
-	//std::cout << "Destrutor BaresIO" << std::endl;
+	
 }
 void BaresIO::clearFile(){
 	std::FILE *outputFile;
 	outputFile = fopen(outputSFile.c_str(),"w");
 
 	if(outputFile != NULL){
-		//const char * c;
+		
 		fputs("", outputFile);
 		fclose(outputFile);
 	}else{
@@ -45,7 +45,7 @@ void BaresIO::writeFile(std::string result){
 		fputs(c, outputFile);
 		fclose(outputFile);
 	}else if(stdOutput){
-		std::cout << result << std::endl;
+		std::cout << result;
 	}else{
 		std::cout << "Arquivo de saida não existe" << std::endl;
 	}
