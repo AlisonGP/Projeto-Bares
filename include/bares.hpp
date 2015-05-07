@@ -53,18 +53,6 @@ class Bares{
 	 * Variavel auxiliar. Armazena o resultado da avaliação de uma expressão posfixa.
 	 */
 	std::string expResult;
-
-
-
-	/**
-	 * Remove todas as ocorrências do caractere c na string str.
-	 * Esse metodo não é usado em nenhum momento.
-	 * @deprecated
-	 * @param str a string de onde serão removidas todas as ocorrências de um determinado caractere.
-	 * @param c caractere que terá todas as ocorrências removidas da string str.
-	 * @return void
-	 */
-	void removeCharacter(std::string& str, char c);
 	
 	/**
 	 * Indica se um operador é unário.

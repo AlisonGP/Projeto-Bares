@@ -1,18 +1,7 @@
 	Bares::Bares(){
 	}
 	Bares::~Bares(){
-	}
-	
-	void Bares::removeCharacter(std::string& str, char c){
-		unsigned int i =0;
-		while(i<str.size()){
-			if(str[i] == c)
-				str = str.erase(i,1);
-			else
-				i++;
-		}
-	}
-	
+	}	
 	bool Bares::isUnary(std::string expression, int i){
 		if(expression[i] == '-' || expression[i] == '~'){
 			if(i==0){
