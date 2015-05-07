@@ -295,46 +295,48 @@
 	}
 	
 	void Bares::avaliate(){
-		std::cout<< "AVALIATE " ;
-		std::string  symb;
-		int opnd1, opnd2;
-		int resultado;
-	int aux;
-	int pos = 1;
+		if(!baresEx.error == true){
+		
+			std::cout<< "AVALIATE " ;
+			std::string  symb;
+			int opnd1, opnd2;
+			int resultado;
+			int aux;
+			int pos = 1;
 
-		while(!expressionPOS.isEmpty()){
-			symb = expressionPOS.dequeue();
-			
-			if(!isOperator(symb)){
-				aux= atoi(symb.c_str());
-				operands.push(aux);
-			}else{
-				if(symb == "~"){
-					opnd1 = operands.pop();
-					//opnd2 = operands.pop();
-					resultado = calculate(symb, opnd1);
-					operands.push(resultado);
+			while(!expressionPOS.isEmpty()){
+				symb = expressionPOS.dequeue();
 				
+				if(!isOperator(symb)){
+					aux= atoi(symb.c_str());
+					operands.push(aux);
 				}else{
-					opnd1 = operands.pop();
-					opnd2 = operands.pop();
-					if(!baresEx.divideByZero(symb,opnd1, pos))
-						resultado = calculate(symb,opnd2, opnd1);
-					operands.push(resultado);
+					if(symb == "~"){
+						opnd1 = operands.pop();
+						//opnd2 = operands.pop();
+						resultado = calculate(symb, opnd1);
+						operands.push(resultado);
+					
+					}else{
+						opnd1 = operands.pop();
+						opnd2 = operands.pop();
+						if(!baresEx.divideByZero(symb,opnd1, pos))
+							resultado = calculate(symb,opnd2, opnd1);
+						operands.push(resultado);
+					}
 				}
+				
+				pos++;
 			}
 			
-			pos++;
+			resultado = operands.pop();
+			//converte resultado (int) para string, com ajuda da biblioteca sstream 
+			std::ostringstream ss;
+			ss << resultado;
+			std::string str = ss.str();
+			//std::cout <<"resultado " <<str << std::endl;
+			expResult =  str;
 		}
-		
-		resultado = operands.pop();
-		//converte resultado (int) para string, com ajuda da biblioteca sstream 
-		std::ostringstream ss;
-		ss << resultado;
-		std::string str = ss.str();
-		//std::cout <<"resultado " <<str << std::endl;
-		expResult =  str;
-		
 	}
 	
 	//Verifica se o operador é binário ou unário.
@@ -418,7 +420,21 @@ void Bares::init(std::string input, std::string output){
 		if(!baresEx.error == true)
 			baresio.writeFile(expResult);
 		
+		//reseta variaveis temporarias para trabalhar co nova expressão
 		std::cout <<std::endl;
 		baresEx.error = false;
+		while(!expressionINF.isEmpty()){
+			expressionINF.dequeue();
+		}
+		while(!expressionPOS.isEmpty()){
+			expressionPOS.dequeue();
+		}
+		while(!operators.isEmpty()){
+			operators.pop();
+		}
+		while(!operands.isEmpty()){
+			operands.pop();
+		}
+		
 	}
 }

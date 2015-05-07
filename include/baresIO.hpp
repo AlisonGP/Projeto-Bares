@@ -68,7 +68,13 @@ public:
 	*/
 	void readFile(Queue<std::string> &expressions);
 	
-	/**remove todas as ocorrências do caractere c na string str*/
+	/**
+	 * Remove todas as ocorrências do caractere c na string str.
+	 * @param str a string de onde serão removidas todas as ocorrências de um determinado caractere.
+	 * @param c caractere que terá todas as ocorrências removidas da string str.
+	 * @see readFile()
+	 * @return void
+	 */
 	void removeCharacter(std::string& str, char c);
 	
 };

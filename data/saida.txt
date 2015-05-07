@@ -1,0 +1,4 @@
+Erro! coluna 3: divisão por zero.
+144
+Erro! coluna 3: operando inválido.
+Erro! coluna 6: divisão por zero.

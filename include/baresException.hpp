@@ -14,7 +14,11 @@ class BaresException
 	BaresIO baresIO;
 	
 public:
+	/**
+	 * Variavel booleana, recebe true para indicar que algum erro foi encontrado na expressão.
+	 */
 	bool error;
+	
 	BaresException(std::string ifile, std::string ofile);
 	BaresException(std::string ifile);
 	BaresException();

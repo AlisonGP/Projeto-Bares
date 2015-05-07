@@ -1,0 +1,4 @@
+8
+Erro! coluna 8: operando inválido.
+-50
+1

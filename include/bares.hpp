@@ -7,77 +7,229 @@
 #include <stdlib.h>
 #include "baresIO.hpp"
 #include "baresException.hpp"
+
+/**
+ * Classe Bares. 
+ * (Basic ARithmetic Expression Evaluator based on Stacks). Faz a tokenização, conversão de infixa para posfixa e avaliação de um conjunto de expressões aritméticas. 
+ * 
+ */
 class Bares{
-	//Atributos
+	/**
+	 * Fila de strings.
+	 * Cada string será convertida em uma expressão posfixa e avaliada. 
+	 */
 	Queue<std::string> expressionsQueue;
-	
+	/**
+	 * Expressão infixa.
+	 * Variavel axiliar. Fila que é usada para converter string em expressão infixa.
+	 */
 	Queue<std::string> expressionINF;
+	/**
+	 * Expressão Posfixa.
+	 * Variável auxiliar. Fila que é usada para converter expressão infixa em posfixa.
+	 */
 	Queue<std::string> expressionPOS;
+	/**
+	 * Operadores.
+	 * Variável auxiliar. Pilha de operadores utilizada na conversão expressão infixa em posfixa.
+	 */
 	Stack<std::string> operators;
+	/**
+	 * Operandos
+	 * Variável auxiliar. Pilha de operandos utilizada na avaliação de expressão posfixa.
+	 */
 	Stack<int> operands;
-	//Queue<std::string> messageError;
+	/**
+	 * Objeto do tipo BaresException.
+	 * Usado para tratamento de erros nas expressões.
+	 */
 	BaresException baresEx;
-	
+	/**
+	 * Resultado da expressão.
+	 * Variavel auxiliar. Armazena o resultado da avaliação de uma expressão posfixa.
+	 */
 	std::string expResult;
 
-	//Métodos
-	/**remove todas as ocorrências do caractere c na string str*/
-	void removeCharacter(std::string& str, char c);
-	/**retorna true se o operando é o primeiro caractere da expression ou se o caractere imediatamente antes dele é um operando*/
-	bool isUnary(std::string expression, int i);
+
+
 	/**
-	* Transforma uma string de estrada em uma expressão expressão IN-fix.*/
+	 * Remove todas as ocorrências do caractere c na string str.
+	 * Esse metodo não é usado em nenhum momento.
+	 * @param str a string de onde serão removidas todas as ocorrências de um determinado caractere.
+	 * @param c caractere que terá todas as ocorrências removidas da string str.
+	 * @return void
+	 */
+	void removeCharacter(std::string& str, char c);
+	
+	/**
+	 * Indica se um operador é unário.
+	 * @param expression string que contem a expressão inteira.
+	 * @param i posição do operador que se quer verificar se é unário. 
+	 * @see tokenize()
+	 * @return true se o operador é o primeiro caractere da expression ou se o caractere imediatamente antes dele é um operador*/
+	bool isUnary(std::string expression, int i);
+	
+	/**
+	* Transforma uma string de estrada em uma expressão infixa.
+	* Coloca a expressão infixa no atributo expressionINF.
+	* @param expression string que será convertida para expresão infixa.
+	* @see init()
+	* @return void
+	* */
 	void tokenize(std::string expression);
-	/** Transforma experssão infixa em pos-fixa.*/
+	
+	/** 
+	 * Transforma experssão infixa em posfixa.
+	 * Converte o atributo expressionINF em uma fila de expressão posfixa, colocando a exxpressao posfixa o atributo expressionPOS.
+	 * @see init();
+	 * @return void
+	 * */
 	void infTOpostFix();
-	/** Verifica erros na expresão.*/
+	
+	/** 
+	 * Verifica erros na expresão.
+	 * Método não utilizado.
+	 * @return void
+	 * */
 	void parse();
-	/** avalia a expressão posfixa.*/
+	
+	/**
+	 * Avalia a expressão posfixa.
+	 * Esvazia a fila de expressão posfixa e calcula o resultado da expressão.
+	 * @see init()
+	 * @return void
+	 * */
 	void avaliate();
 	
-	/** retorna o resultado da adição.*/
+	/** 
+	 * Retorna o resultado da adição.
+	 * @param a primeiro operando.
+	 * @param b segundo operando.
+	 * @see calculate()
+	 * @return a + b
+	 * */
 	int addition(int a, int b);
-	/** retorna o resultado da subtração.*/
+	
+	/** 
+	 * Retorna o resultado da subtração.
+	 * @param a primeiro operando.
+	 * @param b segundo operando.
+	 * @see calculate()
+	 * @return a - b
+	 * */
 	int subtraction(int a, int b);
-	/** retorna o resultado da multiplicação.*/
+	
+	/** 
+	 * Retorna o resultado da multiplicação.
+	 * @param a primeiro operando.
+	 * @param b segundo operando.
+	 * @see calculate()
+	 * @return a * b
+	 * */
 	int multiplication(int a, int b);
-	/** retorna o resultado da divisão.*/
+	
+	/** 
+	 * Retorna o resultado da divisão.
+	 * */
 	int division(int a, int b);
-	/** retorna o resultado do modulo a mod b.*/
+	
+	/** retorna o resultado do modulo a mod b.
+	 * @param a primeiro operando.
+	 * @param b segundo operando.
+	 * @see calculate()
+	 * @return a % b
+	 */
 	int modulo(int a, int b);
-	/** retorna o resultado da exponenciação.*/
+	
+	/** 
+	 * Retorna o resultado da exponenciação.
+	 * @param a primeiro operando.
+	 * @param b segundo operando.
+	 * @see calculate()
+	 * @return a ^ b
+	 * */
 	int exponentiation(int a, int b);
-	/** retorna o resultado da negação.*/
+	
+	/** 
+	 * Retorna o resultado da negação.
+	 * @param a primeiro operando.
+	 * @see calculate()
+	 * @return -a
+	 * */
 	int additiveInverse(int a);
 	
-	/** Calcula o resultado da expressão.*/
+	/** 
+	 * Calcula o resultado da expressão.
+	 * Chama outros metodos dependendo da string oper.
+	 * @param oper string que armazena um operador.
+	 * @param opnd1 primeiro operador.
+	 * @param opnd2 segundo operador.
+	 * @see avaliate()
+	 * @return resultado da operação oper sobre os operandos.
+	 * */
 	int calculate(std::string oper, int opnd1, int opnd2 = 0);
-	/** Verifica se a operação é binária ou unária.*/
+	
+	/** 
+	 * Verifica se operador é binário ou unário.
+	 * Não é utilizado, e está implementado de maneira incorreta.
+	 * */
 	bool isBinary();
 	
-	/** Verifica se a string é um dos simbolo: + - * / % ^ ~ ( ) */
+	/**
+	 * Verifica se a string é um símbolo.
+	 * Um símbolo inclui operações e parenteses.
+	 * @param symb string que contém o símbolo a ser verificado.
+	 * @see isUnary()
+	 * @see tokenize()
+	 * @return true caso symb seja um dos simbolo: + - * / % ^ ~ ( ) 
+	 */
 	bool isSymbol(std::string symb);
 	
-	/** Verifica se o simbolo é um dos operadores: + - * / % ^ ~ */
+	/** 
+	 * Verifica se a string é um operador.
+	 * Verifica se é um símbolo de operador vãlido, não considera parenteses.
+	 * @param symb string que contém o elemento a ser verificado.
+	 * @see infTOposFix()
+	 * @see avaliate()
+	 * @return true se a string é um dos operadores: + - * / % ^ ~ 
+	 * */
 	bool isOperator(std::string symb);
-	/** Verifica se o operando tem mais precedência que outro.*/
+	
+	/** 
+	 * Verifica se o operando tem mais precedência que outro.
+	 * @param opr1 primeiro operando.
+	 * @param opr2 segundo operando.
+	 * @see infTOpostFix()
+	 * @return true quando primeiro operador tem maior ou igual precedência do que segundo operador. 
+	 * */
 	bool prcd(std::string opr1, std::string opr2);
-	/** Imprime o resultado no terminal ou em um arquivo de texto.*/
+	
+	/** Imprime o resultado no terminal ou em um arquivo de texto.
+	 *  Método não utilizado.
+	 */
 	void printResult();
 	
 
 public:
-	/** Chama os métodos necessários para resolver a expressão*/
+	/** 
+	 * Chama os métodos necessários para resolver a expressão.
+	 * Chama os métodos tokenize(), infTOpostFix(), avaliate(), e inicializa objetos da classe BaresIO e BaresException.
+	 * @param input nome do arquivo de entrada (obrigatoriamente dentro do diretório data).
+	 * @param output nome do arquivo de saída (obrigatoriamente dentro do diretório data). Caso o arquivo de saída não seja definido, os resultado devem ser impressos na tela. 
+	 * @return void
+	 */
 	void init(std::string input, std::string output = nullptr);
 	
+	/**
+	 * Construtor default
+	 * */
 	Bares();
-	
-	//Bares(std::string expression);
+	/**
+	 * Destrutor default
+	 * */
 	~Bares();
 
 
 };
-//#include "baresIO.hpp"
-//#include "baresException.hpp"
 #include "../src/bares.cpp"
 #endif
