@@ -21,7 +21,7 @@ BaresIO::BaresIO(std::string inputS){
 BaresIO::BaresIO(){
 }
 BaresIO::~BaresIO(){
-	std::cout << "Destrutor BaresIO" << std::endl;
+	//std::cout << "Destrutor BaresIO" << std::endl;
 }
 void BaresIO::clearFile(){
 	std::FILE *outputFile;
@@ -61,10 +61,19 @@ void BaresIO::readFile(Queue<std::string> &expressions){
 				removeCharacter(line, 32); //espaço
 				removeCharacter(line, 9); //tabulação
 				removeCharacter(line, 10); //nova linha
-				expressions.enqueue(line);
+				if(!line.empty())
+					expressions.enqueue(line);
 				line = "";
 			}
 			line = line + c;
+		}
+
+		if(!line.empty()){
+			removeCharacter(line, 32); //espaço
+			removeCharacter(line, 9); //tabulação
+			removeCharacter(line, 10); //nova linha
+			if(!line.empty())
+				expressions.enqueue(line);
 		}
 		fclose(inputFile);
 	}else{

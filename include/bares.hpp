@@ -7,7 +7,11 @@
 #include <stdlib.h>
 #include "baresIO.hpp"
 #include "baresException.hpp"
-
+/**
+* @autor Alison Jhonas & Gilmar Andrade
+* @version 1.1
+* @since April 21, 2015
+*/
 /**
  * Classe Bares. 
  * (Basic ARithmetic Expression Evaluator based on Stacks). Faz a tokenização, conversão de infixa para posfixa e avaliação de um conjunto de expressões aritméticas. 
@@ -55,6 +59,7 @@ class Bares{
 	/**
 	 * Remove todas as ocorrências do caractere c na string str.
 	 * Esse metodo não é usado em nenhum momento.
+	 * @deprecated
 	 * @param str a string de onde serão removidas todas as ocorrências de um determinado caractere.
 	 * @param c caractere que terá todas as ocorrências removidas da string str.
 	 * @return void
@@ -89,6 +94,7 @@ class Bares{
 	/** 
 	 * Verifica erros na expresão.
 	 * Método não utilizado.
+	 * @deprecated
 	 * @return void
 	 * */
 	void parse();
@@ -169,11 +175,7 @@ class Bares{
 	 * */
 	int calculate(std::string oper, int opnd1, int opnd2 = 0);
 	
-	/** 
-	 * Verifica se operador é binário ou unário.
-	 * Não é utilizado, e está implementado de maneira incorreta.
-	 * */
-	bool isBinary();
+
 	
 	/**
 	 * Verifica se a string é um símbolo.
@@ -204,10 +206,7 @@ class Bares{
 	 * */
 	bool prcd(std::string opr1, std::string opr2);
 	
-	/** Imprime o resultado no terminal ou em um arquivo de texto.
-	 *  Método não utilizado.
-	 */
-	void printResult();
+	
 	
 
 public:

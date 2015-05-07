@@ -5,15 +5,30 @@
 #include <cstdio>
 #include "queue.hpp"
 /**
-* @autor Alison Jhonas
+* @autor Alison Jhonas & Gilmar Andrade
 * @version 1.1
 * @since April 29, 2015
+*/
+/**
+* Classe BaresIO.
+* Permite ler arquivos e escrever em arquivos ou na saída padrão. 
+*
 */
 class BaresIO
 {
 
+	/**
+	* Nome do arquivo de entrada.
+	*/
 	std::string inputSFile;
+	/**
+	* Nome do arquivo de saída.
+	*/
 	std::string outputSFile;
+	/**
+	* Variavel de controle. 
+	* Quando o varlor é true, os dados são escritos na saída padrão. Quando é false, os dados são escritos no arquivo de saída.
+	*/
 	bool stdOutput;
 public:
 	/**
@@ -55,7 +70,7 @@ public:
 
 	/**
 	* Escreve em um arquivo informado pelo usuário o resultado do calculo do bares ou um mensagem de erro.
-	* @param result string como resultado do calculo do bares ou a mensagem de erro.
+	* @param result string com o resultado do calculo do bares ou a mensagem de erro.
 	* @see init()
 	* @return void
 	*/

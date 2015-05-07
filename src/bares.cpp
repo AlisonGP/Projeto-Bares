@@ -1,11 +1,11 @@
 	Bares::Bares(){
-		std::cout << "BARES:construtor default" << std::endl;
+		//std::cout << "BARES:construtor default" << std::endl;
 	}
 	
 	/*Bares::Bares(std::string expr){
 		expressionsQueue.enqueue( expr);
 
-		std::cout << "BARES:construtor" << std::endl;
+		//std::cout << "BARES:construtor" << std::endl;
 		//expressionPOS.enqueue("3");
 		//expressionPOS.enqueue("~");
 		//expressionPOS.enqueue("2");
@@ -20,7 +20,7 @@
 		/**
 			code here
 		*/
-		std::cout << "BARES:destrutor" << std::endl;
+		//std::cout << "BARES:destrutor" << std::endl;
 	}
 	
 	void Bares::removeCharacter(std::string& str, char c){
@@ -56,7 +56,7 @@
 		}
 	}
 	void Bares::tokenize(std::string expression){
-		std::cout << "TOKENIZE ";
+		//std::cout << "TOKENIZE ";
 		
 		int tam = expression.size();
 		
@@ -104,10 +104,11 @@
  * http://stackoverflow.com/questions/12684086/convert-from-an-infix-expression-to-postfix-c-using-stacks
  * */
 	void Bares::infTOpostFix(){
-		std::cout  << "INFTOPOSTFIX ";
+		//std::cout  << "INFTOPOSTFIX ";
 		operators.push("(");
 		std::string current;// = expressionINF.front();
-		//std::cout << current;
+		
+		int countOperators = 0;
 		
 		int pos = 1;
 		while(!expressionINF.isEmpty()){
@@ -126,16 +127,24 @@
 				operators.pop();
 				expressionINF.dequeue();
 			}else if(isOperator(current)) { // se é um operador, coloca na pilha conforme a sua precedencia
+				if(current != "~"){
+					countOperators++;
+					if(expressionPOS.isEmpty() || expressionINF.getSize() == 1 || countOperators == 2)
+						baresEx.operandFault(pos);
+
+				}
 				//std::cout << "operador" << std::endl ;
 				while(!operators.isEmpty() && isOperator(operators.top()) && prcd(operators.top(), current) && current != "~") {
 					expressionPOS.enqueue(operators.pop() );
 				}
 				operators.push(expressionINF.dequeue());
 			}else if(!isOperator( current )){ // se é um operando, coloca em expressionPOS
+				countOperators = 0;
 				if(!baresEx.invalidOperand(current, pos)){
 					baresEx.invalidNumericConstant(current, pos);
 				}
 				expressionPOS.enqueue(expressionINF.dequeue());
+
 			}
 			
 			pos++;
@@ -153,7 +162,7 @@
 	
 		
 		/*
-		std::cout << "2 antes: ";
+		//std::cout << "2 antes: ";
 		expressionPOS.print();
 		
 		bool parentese = false;
@@ -161,20 +170,20 @@
 		
 		std::string aux = "";
 		while(!expressionINF.isEmpty()){
-			std::cout << "while " << expressionINF.front();
+			//std::cout << "while " << expressionINF.front();
 			if(!isOperator(expressionINF.front())){
-				std::cout <<" operando" << std::endl; 
+				//std::cout <<" operando" << std::endl; 
 				//aux = aux+expressionINF.dequeue();
 				//aux = expressionINF.dequeue();
 				//expressionPOS.enqueue(aux);
 				expressionPOS.enqueue(expressionINF.dequeue());
 			}else{
 				
-			std::cout << "expressionPOS: ";
+			//std::cout << "expressionPOS: ";
 			expressionPOS.print();
-				std::cout <<" operador:"; 
+				//std::cout <<" operador:"; 
 				aux = expressionINF.dequeue();
-				std::cout << "operts.isEmpty():" << operators.isEmpty();
+				//std::cout << "operts.isEmpty():" << operators.isEmpty();
 				if( aux!= "(" && aux != ")")	{
 					if(parentese == true){
 						operators.push(aux);
@@ -182,7 +191,7 @@
 						
 					}else{
 						while(!operators.isEmpty() && prcd(operators.top(), aux)   && aux != "~"){
-							std::cout << " prcd("<<operators.top()<<", " << aux<<"):" << prcd(operators.top(), aux);
+							//std::cout << " prcd("<<operators.top()<<", " << aux<<"):" << prcd(operators.top(), aux);
 							//std::cout << "While interno 1" << aux << std::endl;
 							if(prcd(operators.top(), aux)){
 								//if(operators.top() != ")" && operators.top() != "(")	
@@ -201,7 +210,7 @@
 					
 				}
 				//operators.push(aux);
-				std::cout << " oprts:" ;
+				//std::cout << " oprts:" ;
 				operators.print();
 			}				
 		}
@@ -209,7 +218,7 @@
 			expressionPOS.enqueue(operators.pop());
 		}
 		
-			std::cout << "expressionPOS: ";
+			//std::cout << "expressionPOS: ";
 			expressionPOS.print();
 		*/
 	}
@@ -297,7 +306,7 @@
 	void Bares::avaliate(){
 		if(!baresEx.error == true){
 		
-			std::cout<< "AVALIATE " ;
+			//std::cout<< "AVALIATE " ;
 			std::string  symb;
 			int opnd1, opnd2;
 			int resultado;
@@ -318,11 +327,15 @@
 						operands.push(resultado);
 					
 					}else{
-						opnd1 = operands.pop();
-						opnd2 = operands.pop();
-						if(!baresEx.divideByZero(symb,opnd1, pos))
-							resultado = calculate(symb,opnd2, opnd1);
-						operands.push(resultado);
+						
+							opnd1 = operands.pop();
+							opnd2 = operands.pop();
+							
+
+							if(!baresEx.divideByZero(symb,opnd1, pos))
+								resultado = calculate(symb,opnd2, opnd1);
+							operands.push(resultado);
+						
 					}
 				}
 				
@@ -339,17 +352,6 @@
 		}
 	}
 	
-	//Verifica se o operador é binário ou unário.
-	bool Bares::isBinary(){
-		//Verifica se a pilha de operadores está vazia e se a fila de operandos tamém está vazia.
-		if(operators.isEmpty() && expressionPOS.isEmpty())
-			return false;
-		//Verifica se a pila de operadores possui mais elementos que a fila de operandos. 
-		if(operators.getSize() >= expressionPOS.getSize())
-			return false;		
-
-		return true;
-	}
 
 	//Verifica se operador1 tem maior precedencia que operador2 
 	bool Bares::prcd(std::string opr1, std::string opr2){
@@ -388,11 +390,6 @@
 		return false;
 	}
 	
-	void Bares::printResult(){
-		/**
-			code here
-		*/
-	}
 
 void Bares::init(std::string input, std::string output){
 	
@@ -411,17 +408,18 @@ void Bares::init(std::string input, std::string output){
 	std::string aux;
 	while(!expressionsQueue.isEmpty()){
 		aux = expressionsQueue.dequeue();
-		std::cout << "\"" <<aux << "\":" << std::endl;
+		//std::cout << "\"" <<aux << "\":" << std::endl;
 		tokenize(aux);
-		expressionINF.print();
+		//expressionINF.print();
 		infTOpostFix();
-		expressionPOS.print();
+		//expressionPOS.print();
 		avaliate();
-		if(!baresEx.error == true)
+		if(!baresEx.error == true){
+			
 			baresio.writeFile(expResult);
-		
+		}
 		//reseta variaveis temporarias para trabalhar co nova expressão
-		std::cout <<std::endl;
+		//std::cout <<std::endl;
 		baresEx.error = false;
 		while(!expressionINF.isEmpty()){
 			expressionINF.dequeue();

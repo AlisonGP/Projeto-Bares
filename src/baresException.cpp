@@ -10,7 +10,7 @@ BaresException::BaresException(){
 	error = false;
 }
 BaresException::~BaresException(){
-	std::cout << "Destrutor BaresException" << std::endl; 
+	//std::cout << "Destrutor BaresException" << std::endl; 
 }
 bool BaresException::invalidNumericConstant(std::string operand, int pos){
 	
@@ -27,17 +27,17 @@ bool BaresException::invalidNumericConstant(std::string operand, int pos){
 	}
 	return false;
 }
-bool BaresException::invalidNumericConstant(int operand){
-	if(operand > 32767){
-	std::string message = "Operando fora da faixa permitida\nFaixa de valores permetido: -32767 a 32767.";
+
+void BaresException::operandFault(int pos){
+	std::stringstream ss;
+	ss << pos;
+	std::string str = ss.str();
+	std::string message = "Erro! coluna "+ str + ": falta de operando.";
 	baresIO.writeFile(message);
-	return false;
-	}
-	return true;
-}
-bool BaresException::operandFaultException(){
-	std::string message = "Operando não encontrado na coluna: i.";
-	baresIO.writeFile(message);
+	
+	//sinalizador da classe BaresException (recebe true quando algum erro foi encontrado)
+	error = true;
+	
 }
 bool BaresException::invalidOperand(std::string operand, int pos){
 	//std::cout << "pode ser operando  "<< operand<<  " tam:"<<operand.length()<< std::endl;
